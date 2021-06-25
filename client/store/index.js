@@ -4,10 +4,12 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
 import locationReducer from './location'
+import guessReducer from './guess'
 
 const reducer = combineReducers({
   auth,
-  location: locationReducer
+  location: locationReducer,
+  guess: guessReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

@@ -11,7 +11,7 @@ const StreetView = () => {
     dispatch(getLocation())
   }, [])
 
-  const API_KEY="AIzaSyCRpVQa_Ey33lyDwTc3OpOhHVcfyD0YVAE"
+  const API_KEY="AIzaSyCRpVQa_Ey33lyDwTc3OpOhHVcfyD0YVAE" //move this elsewhere
   const panoramaOptions = {
     position: {
       lat: location.latitude,
@@ -21,12 +21,11 @@ const StreetView = () => {
     showRoadLabels: false,
     zoom: 0,
     fullscreenControl: false,
-
   }
 
   return (
-    <div style={{height: '800px'}}>
-      {location ? <GoogleStreetview apiKey={API_KEY} streetViewPanoramaOptions={panoramaOptions} /> : <span>loading</span> }
+    <div style={{height: '80vh'}}>
+      {location === undefined ? <span>loading</span> : <GoogleStreetview apiKey={API_KEY} streetViewPanoramaOptions={panoramaOptions} /> }
     </div>
   )
 }
