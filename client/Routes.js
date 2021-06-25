@@ -4,6 +4,7 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
+import Game from './components/Game'
 
 /**
  * COMPONENT
@@ -19,8 +20,11 @@ const Routes = () => {
   return (
     <div>
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/home">
           <Home />
+        </Route>
+        <Route path="/game">
+          <Game />
         </Route>
       </Switch>
     </div>

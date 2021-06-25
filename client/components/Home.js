@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import StreetView from './StreetView'
 
 /**
  * COMPONENT
@@ -7,8 +7,9 @@ import {connect} from 'react-redux'
 const Home = () => {
 
   return (
-    <div>
-      <h3>Hello</h3>
+    <div id='home-container'>
+      Welcome to GeoApproximatr
+      Click anywhere to begin your journey
     </div>
   )
 }

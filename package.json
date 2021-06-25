@@ -20,14 +20,19 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.12.1",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "compression": "^1.7.3",
+    "dotenv": "^10.0.0",
     "express": "^4.16.4",
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
+    "react-google-maps": "^9.4.5",
+    "react-google-streetview": "0.0.9",
+    "react-streetview": "^1.1.1",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
