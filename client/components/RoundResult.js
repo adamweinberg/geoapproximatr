@@ -1,25 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDistance } from "../store/guess";
+import { getDistance, getScore } from "../store/guess";
 
 const RoundResult = () => {
   const dispatch = useDispatch();
   const { location, guess } = useSelector((state) => state);
 
   const [distance, setDistance] = useState({ distance: null });
+  const [score, setScore] = useState({score: null})
 
   useEffect(() => {
-    dispatch(getDistance(guess, location));
     if (guess) {
-      setDistance("fhdas");
+      setDistance("");
     }
-  }, [distance]);
+    dispatch(getDistance(guess, location));
+
+    if (guess.distance) {
+      setScore('')
+    }
+    dispatch(getScore(guess.distance))
+  }, [distance, score]);
 
   return (
     <div>
       Round result
       {guess.distance ? (
         <div>Your guess was {guess.distance} miles away from the location </div>
+      ) : (
+        <span>loading...</span>
+      )}
+      {guess.score ? (
+        <div>You scored {guess.score} points this round </div>
       ) : (
         <span>loading...</span>
       )}

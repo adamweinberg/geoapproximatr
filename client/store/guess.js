@@ -1,4 +1,4 @@
-import { calculateDistance } from "../../script/calcs";
+import { calculateDistance, calculateScore } from "../../script/calcs";
 
 //ACTION TYPE
 export const SUBMIT_GUESS = 'SUBMIT_GUESS'
@@ -35,6 +35,13 @@ export const getDistance = (guess, location) => {
   };
 };
 
+export const getScore = (distance) => {
+  return async dispatch => {
+    const score = calculateScore(distance)
+    dispatch(gotScore(score))
+  }
+}
+
 //REDUCER
 export default function guessReducer(state = {}, action) {
   switch (action.type) {
@@ -42,6 +49,8 @@ export default function guessReducer(state = {}, action) {
       return action.guess
     case GOT_DISTANCE:
       return {...state, distance: action.distance}
+    case GOT_SCORE:
+      return {...state, score: action.score}
     default:
       return state
   }
