@@ -29,14 +29,14 @@ export const gotScore = (score) => {
 
 //THUNK
 export const getDistance = (guess, location) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     const distance = calculateDistance(guess, location);
     dispatch(gotDistance(distance))
   };
 };
 
 export const getScore = (distance) => {
-  return async dispatch => {
+  return dispatch => {
     const score = calculateScore(distance)
     dispatch(gotScore(score))
   }

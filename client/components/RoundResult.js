@@ -15,11 +15,11 @@ const RoundResult = () => {
     }
     dispatch(getDistance(guess, location));
 
-    if (guess.distance) {
-      setScore('')
-    }
-    dispatch(getScore(guess.distance))
-  }, [distance, score]);
+    // if (guess.distance) {
+    //   setScore('')
+    // }
+    // dispatch(getScore(guess.distance))
+  }, [distance]);
 
   return (
     <div>
