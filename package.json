@@ -26,6 +26,7 @@
     "compression": "^1.7.3",
     "dotenv": "^10.0.0",
     "express": "^4.16.4",
+    "google-map-react": "^2.1.10",
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
@@ -33,7 +34,8 @@
     "react-google-maps": "^9.4.5",
     "react-google-streetview": "0.0.9",
     "react-streetview": "^1.1.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
