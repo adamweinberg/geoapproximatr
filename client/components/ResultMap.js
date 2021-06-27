@@ -22,7 +22,7 @@ const ResultMap = (props) => {
       lat: midpoint.latitude,
       lng: midpoint.longitude,
     },
-    zoom: zoom,
+    zoom: zoom - 1, //calculated zoom is sometimes too much, so just zoom out 1 extra level
   };
 
   const API_KEY = "AIzaSyDS1KQ2VDCVYv0pTJzcrRIN3xbWzzChJLg"; //move this elsewhere
