@@ -12,26 +12,29 @@ const Game = () => {
     setActiveStep(activeStep + 1);
   };
 
+  const handleNewGame = () => {
+    //new game code here
+  }
+
   function getStepContent(step) {
     if (step % 2 === 1) {
-      return <Approximatr />;
+      return <Approximatr activeStep={activeStep} />;
     } else {
-      return <RoundResult />;
+      return <RoundResult activeStep={activeStep} />;
     }
   }
 
   return (
     <div id="game-container">
-      {activeStep === rounds * 2 ? (
-        <GameResult />
-      ) : (
-        <React.Fragment>
-          {getStepContent(activeStep)}
-          <button onClick={handleSubmit}>
-            {activeStep % 2 === 1 ? "Submit Guess" : "Next Round"}
-          </button>
-        </React.Fragment>
-      )}
+      <React.Fragment>
+        {getStepContent(activeStep)}
+        {activeStep !== rounds * 2 ?
+        (<button onClick={handleSubmit}>
+          {activeStep % 2 === 1 ? "Submit Guess" : "Next Round"}
+        </button>) : (
+          <button onClick={handleNewGame}>New Game</button>
+        ) }
+      </React.Fragment>
     </div>
   );
 };

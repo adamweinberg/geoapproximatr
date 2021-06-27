@@ -7,7 +7,7 @@ import { submitGuess } from '../store/guess'
 const Map = () => {
   const dispatch = useDispatch();
 
-  const [guess, setGuess] = useState({ latitude: 0, longitude: 0 });
+  const [guess, setGuess] = useState({ latitude: null, longitude: null });
 
   const guessRef = useRef(guess)
 

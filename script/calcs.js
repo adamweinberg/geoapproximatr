@@ -20,9 +20,11 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
 
-export function calculateScore(distance) {
+export function calculateScore(guess, location) {
+  const distance = calculateDistance(guess, location)
+
   const zeroScoreDistance = 4000 //the maximum distance that allows for points to be awarded
-  let score = Math.pow(distance, 2) * (-1 / 5000) + zeroScoreDistance //random quadratic function to calculate score. not too concerned about the scoring
+  let score = Math.pow(distance, 2) * (-1 / zeroScoreDistance) + 5000 //random quadratic function to calculate score. not too concerned about the scoring
   score = Math.round(score) //round score to nearest integer
   if (score < 0) {
     score = 0 //dont allow negative scores

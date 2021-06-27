@@ -1,38 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDistance, getScore } from "../store/guess";
+import { calculateDistance, calculateScore } from "../../script/calcs";
+import { saveDistance, saveScore } from "../store/game";
+import GameResult from "./GameResult";
 
-const RoundResult = () => {
+const RoundResult = (props) => {
+  const { activeStep } = props;
   const dispatch = useDispatch();
   const { location, guess } = useSelector((state) => state);
 
-  const [distance, setDistance] = useState({ distance: null });
-  const [score, setScore] = useState({score: null})
+  const [distance, setDistance] = useState(null);
+  const [score, setScore] = useState(null);
+
+  const distanceRef = useRef(distance);
+  const scoreRef = useRef(score);
 
   useEffect(() => {
-    if (guess) {
-      setDistance("");
-    }
-    dispatch(getDistance(guess, location));
+    distanceRef.current = distance;
+    scoreRef.current = score;
+  })
 
-    // if (guess.distance) {
-    //   setScore('')
-    // }
-    // dispatch(getScore(guess.distance))
-  }, [distance]);
+  useEffect(() => {
+    setDistance(calculateDistance(guess, location));
+    setScore(calculateScore(guess, location));
+  }, [distance, score]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(saveDistance(distanceRef.current)); //add distance and score to global state after unmount
+      dispatch(saveScore(scoreRef.current));
+    };
+  }, []);
 
   return (
     <div>
       Round result
-      {guess.distance ? (
-        <div>Your guess was {guess.distance} miles away from the location </div>
+      {distance > -1 && score > -1 ? (
+        <div id="round-results">
+          <div>Your guess was {distance} miles away from the location </div>
+          <div>You scored {score} points this round </div>
+        </div>
       ) : (
         <span>loading...</span>
       )}
-      {guess.score ? (
-        <div>You scored {guess.score} points this round </div>
+      {activeStep === 10 ? (
+        <GameResult score={score} distance={distance} />
       ) : (
-        <span>loading...</span>
+        <span></span>
       )}
     </div>
   );
