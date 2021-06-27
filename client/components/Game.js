@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch } from 'react-redux'
 import Approximatr from "./Approximatr";
 import RoundResult from "./RoundResult";
 import GameResult from "./GameResult";
+import { resetGame } from '../store/game'
+import { resetGuess } from '../store/guess'
+import { resetLocation } from '../store/location'
 
 const rounds = 5;
 
 const Game = () => {
+  const dispatch = useDispatch()
+
   const [activeStep, setActiveStep] = useState(1);
 
   const handleSubmit = () => {
@@ -13,7 +19,10 @@ const Game = () => {
   };
 
   const handleNewGame = () => {
-    //new game code here
+    setActiveStep(1)
+    dispatch(resetGame())
+    dispatch(resetGuess())
+    dispatch(resetLocation())
   }
 
   function getStepContent(step) {

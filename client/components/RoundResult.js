@@ -18,7 +18,7 @@ const RoundResult = (props) => {
   useEffect(() => {
     distanceRef.current = distance;
     scoreRef.current = score;
-  })
+  });
 
   useEffect(() => {
     setDistance(calculateDistance(guess, location));
@@ -27,8 +27,10 @@ const RoundResult = (props) => {
 
   useEffect(() => {
     return () => {
-      dispatch(saveDistance(distanceRef.current)); //add distance and score to global state after unmount
-      dispatch(saveScore(scoreRef.current));
+      if (activeStep !== 10) { //don't do it for the last round so we can start a new game... will need to figure out a workaround if i want to save total scores somewhere
+        dispatch(saveDistance(distanceRef.current)); //add distance and score to global state after unmount
+        dispatch(saveScore(scoreRef.current));
+      }
     };
   }, []);
 
