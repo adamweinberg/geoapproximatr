@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { calculateDistance, calculateScore } from "../../script/calcs";
 import { saveDistance, saveScore } from "../store/game";
 import GameResult from "./GameResult";
+import ResultMap from './ResultMap'
 
 const RoundResult = (props) => {
   const { activeStep } = props;
@@ -45,6 +46,7 @@ const RoundResult = (props) => {
       ) : (
         <span>loading...</span>
       )}
+      <ResultMap location={location} guess={guess} distance={distance}/>
       {activeStep === 10 ? (
         <GameResult score={score} distance={distance} />
       ) : (
