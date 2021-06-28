@@ -47,7 +47,6 @@ export function calculateMapZoom(guess, location) {
     //just zoom out everything that's really far away
     zoom = 0;
   }
-  console.log(zoom);
   return zoom;
 }
 
