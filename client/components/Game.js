@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from 'react-redux'
 import Approximatr from "./Approximatr";
 import RoundResult from "./RoundResult";
-import GameResult from "./GameResult";
 import { resetGame } from '../store/game'
 import { resetGuess } from '../store/guess'
 import { resetLocation } from '../store/location'

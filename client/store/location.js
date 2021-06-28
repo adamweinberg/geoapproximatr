@@ -1,4 +1,4 @@
-import axios from "axios"
+import randomStreetView from 'random-streetview'
 
 //ACTION TYPE
 export const GOT_LOCATION = 'GOT_LOCATION'
@@ -21,8 +21,10 @@ export const resetLocation = () => {
 //THUNK
 export const getLocation = () => {
   return async dispatch => {
-    const location = {latitude: 34.0880321, longitude: -118.3255821}
-    dispatch(gotLocation(location))
+    const location = await randomStreetView.getRandomLocation()
+    const locationObj = {latitude: location[0], longitude: location[1]}
+    console.log(locationObj)
+    dispatch(gotLocation(locationObj))
   }
 }
 

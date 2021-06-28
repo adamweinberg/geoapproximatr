@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import GoogleMapReact from "google-map-react";
 import guessMarker from "../../public/guess-marker.png";
 import locationMarker from "../../public/location-marker.png";
