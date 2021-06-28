@@ -24,10 +24,12 @@ function deg2rad(deg) {
 }
 
 export function calculateScore(guess, location) {
-  const distance = calculateDistance(guess, location);
+  let distance = calculateDistance(guess, location);
+  distance = distance * 1.609
 
-  const zeroScoreDistance = 4000; //the maximum distance that allows for points to be awarded
-  let score = Math.pow(distance, 2) * (-1 / zeroScoreDistance) + 5000; //random quadratic function to calculate score. not too concerned about the scoring
+  //const zeroScoreDistance = 4000; //the maximum distance that allows for points to be awarded
+  //let score = Math.pow(distance, 2) * (-1 / zeroScoreDistance) + 5000; //random quadratic function to calculate score. not too concerned about the scoring
+  let score = 5000 * Math.pow(Math.E, ((-1 * distance) / 2000))
   score = Math.round(score); //round score to nearest integer
   if (score < 0) {
     score = 0; //dont allow negative scores
