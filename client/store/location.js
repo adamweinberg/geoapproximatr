@@ -23,7 +23,7 @@ export const getLocation = () => {
   return async dispatch => {
     const location = await randomStreetView.getRandomLocation()
     const locationObj = {latitude: location[0], longitude: location[1]}
-    //const locationObj = {latitude: 54.7141104563471, longitude: 45.010128021240234 }
+    //const locationObj = {latitude: 54.7141104563471, longitude: 45.010128021240234 } for testing
     dispatch(gotLocation(locationObj))
   }
 }

@@ -30,7 +30,7 @@ const StreetView = () => {
   }
 
   return (
-    <div style={{height: '80vh'}}>
+    <div style={{height: '85vh', width: '70%'}}>
       {!gotNewLocation ? <span>loading</span> : <GoogleStreetview apiKey={API_KEY} streetViewPanoramaOptions={panoramaOptions} /> }
     </div>
   )

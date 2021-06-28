@@ -18,8 +18,8 @@ const Approximatr = (props) => {
         <p>Round: {Math.ceil(activeStep / 2)} / 5</p>
         <p>Score: {totalScore}</p>
       </div>
-      <StreetView />
-      <div id="map-and-buttons">
+      <div id="sv-and-map">
+        <StreetView />
         <Map />
       </div>
     </div>

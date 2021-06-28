@@ -33,3 +33,7 @@ GoogleStreetview {
 #home-container> {
   text-decoration: none;
 }
+
+#sv-and-map {
+  display: flex
+}
