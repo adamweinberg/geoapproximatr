@@ -12,8 +12,6 @@ const Approximatr = (props) => {
     totalScore = game.scores.reduce((curr, acc) => acc + curr)
   }
 
-  console.log(totalScore)
-
   return (
     <div id="approximatr-container">
       <div id="round-info">

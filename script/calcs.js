@@ -35,6 +35,22 @@ export function calculateScore(guess, location) {
   return score;
 }
 
+export function calculateMapZoom(guess, location) {
+  //https://stackoverflow.com/questions/6048975/google-maps-v3-how-to-calculate-the-zoom-level-for-a-given-bounds
+  const GLOBE_WIDTH = 256;
+  let angle = guess.longitude - location.longitude;
+  if (angle < 0) {
+    angle += 360;
+  }
+  let zoom = Math.floor(Math.log((360 * 800) / angle / GLOBE_WIDTH) / Math.LN2);
+  if (zoom === 2) {
+    //just zoom out everything that's really far away
+    zoom = 0;
+  }
+  console.log(zoom);
+  return zoom;
+}
+
 export function calculateMidpoint(guess, location) {
   const midLat = (guess.latitude + location.latitude) / 2;
   const midLng = (guess.longitude + location.longitude) / 2;
@@ -43,31 +59,30 @@ export function calculateMidpoint(guess, location) {
 }
 
 export function getZoomLevel(guess, location, mapDim) {
-  //https://stackoverflow.com/questions/6048975/google-maps-v3-how-to-calculate-the-zoom-level-for-a-given-bound/ this function works most of the time
   var WORLD_DIM = { height: 256, width: 256 };
   var ZOOM_MAX = 21;
 
-  function latRad(lat) {
-    var sin = Math.sin((lat * Math.PI) / 180);
-    var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
-    return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
-  }
+  // function latRad(lat) {
+  //   var sin = Math.sin((lat * Math.PI) / 180);
+  //   var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+  //   return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+  // }
 
   function zoom(mapPx, worldPx, fraction) {
     return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
   }
 
-  let latDiff = guess.latitude - location.latitude;
-  if (latDiff < 0) {
-    latDiff += 180;
-  }
-  let latFraction = latRad(latDiff) / Math.PI;
-  if (latFraction < 0) {
-    latFraction *= -1; //probably not necessary
-  }
+  // let latFraction =
+  //   (latRad(guess.latitude) - latRad(location.latitude)) / Math.PI;
+  // if (latFraction < 0) {
+  //   latFraction *= -1;
+  // }
 
-  let lngDiff = guess.longitude - location.longitude;
-  let lngFraction = (lngDiff < 0 ? lngDiff + 360 : lngDiff) / 360;
+  let latDiff = Math.abs(guess.latitude - location.latitude)
+  let latFraction = latDiff / 180;
+
+  let lngDiff = Math.abs(guess.longitude - location.longitude);
+  let lngFraction = lngDiff / 360;
 
   let latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
   let lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
