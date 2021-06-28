@@ -20,7 +20,6 @@ const Approximatr = (props) => {
       </div>
       <StreetView />
       <div id="map-and-buttons">
-        <button>Return to Start</button>
         <Map />
       </div>
     </div>
