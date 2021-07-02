@@ -1,1 +1,1 @@
-# GeoApproximatr - a GeoGuessr clone
+# GeoApproximatr - A GeoGuessr Clone
