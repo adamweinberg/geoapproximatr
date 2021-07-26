@@ -4,7 +4,9 @@ import GoogleStreetview from "react-google-streetview";
 import { getLocation } from "../store/location";
 import Loader from "react-loader-spinner";
 
-const StreetView = () => {
+const StreetView = (props) => {
+  const { API_KEY } = props
+
   const dispatch = useDispatch();
   const { location } = useSelector((state) => state);
 
@@ -12,7 +14,6 @@ const StreetView = () => {
     dispatch(getLocation());
   }, []);
 
-  const API_KEY = "AIzaSyCRpVQa_Ey33lyDwTc3OpOhHVcfyD0YVAE"; //move this elsewhere
   const panoramaOptions = {
     position: {
       lat: location.latitude,

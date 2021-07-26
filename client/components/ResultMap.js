@@ -3,6 +3,7 @@ import GoogleMapReact from "google-map-react";
 import guessMarker from "../../public/guess-marker.png";
 import locationMarker from "../../public/location-marker.png";
 import { calculateMidpoint, getZoomLevel } from "../../script/calcs";
+import keys from "../../script/keys";
 
 const ResultMap = (props) => {
   const { location, guess } = props;
@@ -24,13 +25,11 @@ const ResultMap = (props) => {
     zoom: zoom - 1, //calculated zoom is sometimes too much, so just zoom out 1 extra level
   };
 
-  const API_KEY = "AIzaSyDS1KQ2VDCVYv0pTJzcrRIN3xbWzzChJLg"; //move this elsewhere
-
   return (
     <div style={{ height: "600px", width: "100%" }}>
       {!isNaN(defaultProps.zoom) ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: API_KEY }}
+          bootstrapURLKeys={{ key: keys.maps }}
           yesIWantToUseGoogleMapApiInternals
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}

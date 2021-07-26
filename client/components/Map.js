@@ -4,7 +4,9 @@ import GoogleMapReact from "google-map-react";
 import guessMarker from "../../public/guess-marker.png";
 import { submitGuess } from '../store/guess'
 
-const Map = () => {
+const Map = (props) => {
+  const { API_KEY } = props
+
   const dispatch = useDispatch();
 
   const [guess, setGuess] = useState({ latitude: null, longitude: null });
@@ -18,8 +20,6 @@ const Map = () => {
     },
     zoom: 2,
   };
-
-  const API_KEY = "AIzaSyDS1KQ2VDCVYv0pTJzcrRIN3xbWzzChJLg"; //move this elsewhere
 
   const placeMarker = (event) => {
     setGuess({ latitude: event.lat, longitude: event.lng });
