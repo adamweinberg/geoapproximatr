@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateDistance, calculateScore } from "../../script/calcs";
 import { saveDistance, saveScore } from "../store/game";
+import { resetLocation } from "../store/location";
 import GameResult from "./GameResult";
 import ResultMap from './ResultMap'
 
@@ -32,6 +33,7 @@ const RoundResult = (props) => {
         dispatch(saveDistance(distanceRef.current)); //add distance and score to global state after unmount
         dispatch(saveScore(scoreRef.current));
       }
+      dispatch(resetLocation()) //clear the location for the next round
     };
   }, []);
 
