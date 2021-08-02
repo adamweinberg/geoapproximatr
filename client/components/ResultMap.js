@@ -12,9 +12,7 @@ const ResultMap = (props) => {
 
   let zoom;
   if (guess.latitude !== "") {
-    //proabbly some excess safeguarding here. will refactor later
     zoom = getZoomLevel(guess, location, { height: 600, width: screen.width });
-    console.log(zoom);
   }
 
   let defaultProps = {
@@ -22,7 +20,7 @@ const ResultMap = (props) => {
       lat: midpoint.latitude,
       lng: midpoint.longitude,
     },
-    zoom: zoom - 1, //calculated zoom is sometimes too much, so just zoom out 1 extra level
+    zoom: zoom
   };
 
   return (
