@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import GoogleMapReact from "google-map-react";
 import guessMarker from "../../public/guess-marker.png";
 import { submitGuess } from "../store/guess";
-import Loader from "react-loader-spinner";
 
 const Map = (props) => {
   const { API_KEY } = props;
@@ -38,9 +37,7 @@ const Map = (props) => {
   return (
     <div style={{ height: "300px", width: "30%" }}>
       {!location.latitude ? (
-        <div id="loader">
-          <Loader type="Puff" color="#00BFFF" height={100} width={100} />
-        </div>
+        <div id="loader"></div>
       ) : (
         <div style={{ height: "300px", width: "100%" }}>
           <GoogleMapReact
