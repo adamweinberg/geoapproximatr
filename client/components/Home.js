@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-/**
- * COMPONENT
- */
 const Home = () => {
   return (
     <Link to="/game">

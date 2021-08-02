@@ -8,6 +8,7 @@ const Approximatr = (props) => {
   const { game } = useSelector(state => state)
   const { activeStep } = props
   let totalScore = 0
+  let roundNumber = Math.ceil(activeStep / 2)
 
   if ( game.scores.length > 0 ) {
     totalScore = game.scores.reduce((curr, acc) => acc + curr)
@@ -16,12 +17,12 @@ const Approximatr = (props) => {
   return (
     <div id="approximatr-container">
       <div id="round-info">
-        <p>Round: {Math.ceil(activeStep / 2)} / 5</p>
+        <p>Round: {roundNumber} / 5</p>
         <p>Score: {totalScore}</p>
       </div>
       <div id="sv-and-map">
-        <StreetView API_KEY={keys.streetview}/>
-        <Map API_KEY={keys.maps}/>
+        <StreetView API_KEY={keys.streetview} />
+        <Map API_KEY={keys.maps} />
       </div>
     </div>
   );
