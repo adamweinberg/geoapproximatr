@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: #fcfcfc;
 }
 
 a {
@@ -52,7 +53,7 @@ GoogleStreetview {
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: aliceblue;
+  background-color: #9DECCA;
 }
 
 #round-info {

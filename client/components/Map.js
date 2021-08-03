@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import GoogleMapReact from "google-map-react";
 import guessMarker from "../../public/guess-marker.png";
 import { submitGuess } from "../store/guess";
+import Loader from "react-loader-spinner";
 
 const Map = (props) => {
-  const { API_KEY } = props;
+  const { API_KEY, activeStep } = props;
 
   const dispatch = useDispatch();
   const { location } = useSelector((state) => state);
@@ -36,8 +37,10 @@ const Map = (props) => {
 
   return (
     <div id="map-container" style={{ height: "45vh", width: "30%" }}>
-      {!location.latitude ? (
-        <div id="loader"></div>
+      {!location.latitude && activeStep===1 ? (
+        <div id="loader">
+          <Loader type="Circles" color="#3649BD" height={100} width={100} />
+        </div>
       ) : (
         <div style={{ height: "300px", width: "100%" }}>
           <GoogleMapReact

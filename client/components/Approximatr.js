@@ -22,7 +22,7 @@ const Approximatr = (props) => {
       </div>
       <div id="sv-and-map">
         <StreetView API_KEY={keys.streetview} />
-        <Map API_KEY={keys.maps} />
+        <Map API_KEY={keys.maps} activeStep={activeStep} />
       </div>
     </div>
   );
