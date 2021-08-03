@@ -56,12 +56,52 @@ GoogleStreetview {
   background-color: #9DECCA;
 }
 
-#round-info {
+#round-and-score {
   display: flex;
   background-color: white;
   justify-content: space-evenly;
   position: fixed;
-  top: 20px;
-  left: 75%;
+  top: 35px;
+  right: 29%;
   z-index: 100;
+  background-color: #46237a;
+  height: 5rem;
+  border-radius: 10px;
+  font-family: 'Roboto';
+  border: 3px solid #9DECCA
+}
+
+#round-info,#score-info {
+  padding: .5rem;
+  border-radius: 5px;
+  background-color: #fcfcfc;
+  height: 2.5rem;
+}
+
+#round-info {
+  margin: auto .5rem auto 1rem
+}
+
+#score-info {
+  margin: auto 1rem auto .5rem;
+}
+
+#round-info>label,#score-info>label {
+  font-size: 10px;
+  text-align: left;
+  border-bottom: 2px solid #46237a;
+  padding-bottom: .1rem;
+}
+
+#round-info>p,#score-info>p {
+  font-size: 22px;
+  color: #256eff;
+  margin: 0;
+  text-align: right;
+  padding-top: .25rem;
+}
+
+#over-five {
+  font-size: 10px;
+  color: black;
 }

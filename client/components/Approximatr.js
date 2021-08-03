@@ -16,9 +16,17 @@ const Approximatr = (props) => {
 
   return (
     <div id="approximatr-container">
-      <div id="round-info">
-        <p>Round: {roundNumber} / 5</p>
-        <p>Score: {totalScore}</p>
+      <div id="round-and-score">
+        <div id='round-info'>
+          <label>ROUND</label>
+          <p>{roundNumber}
+            <span id='over-five'>/5</span>
+          </p>
+        </div>
+        <div id='score-info'>
+          <label>SCORE</label>
+          <p>{totalScore}</p>
+        </div>
       </div>
       <div id="sv-and-map">
         <StreetView API_KEY={keys.streetview} />

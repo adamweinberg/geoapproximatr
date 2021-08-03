@@ -37,7 +37,7 @@ const Map = (props) => {
 
   return (
     <div id="map-container" style={{ height: "45vh", width: "30%" }}>
-      {!location.latitude && activeStep===1 ? (
+      {!location.latitude && activeStep===1 ? ( //show spinner on first round to prevent invisible map
         <div id="loader">
           <Loader type="Circles" color="#3649BD" height={100} width={100} />
         </div>
