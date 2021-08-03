@@ -5,6 +5,7 @@ import RoundResult from "./RoundResult";
 import { resetGame } from '../store/game'
 import { resetGuess } from '../store/guess'
 import { resetLocation } from '../store/location'
+import { Button } from '@material-ui/core'
 
 const rounds = 5;
 
@@ -37,10 +38,10 @@ const Game = () => {
       <React.Fragment>
         {getStepContent(activeStep)}
         {activeStep !== rounds * 2 ?
-        (<button onClick={handleSubmit}>
+        (<Button onClick={handleSubmit}>
           {activeStep % 2 === 1 ? "Submit Guess" : "Next Round"}
-        </button>) : (
-          <button onClick={handleNewGame}>New Game</button>
+        </Button>) : (
+          <Button onClick={handleNewGame}>New Game</Button>
         ) }
       </React.Fragment>
     </div>

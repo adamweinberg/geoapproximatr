@@ -35,7 +35,16 @@ GoogleStreetview {
 }
 
 #sv-and-map {
-  display: flex
+  display: flex;
+  margin: auto;
+}
+
+#sv-container {
+  padding: 10px
+}
+
+#map-container {
+  padding: 10px
 }
 
 #loader {
@@ -44,4 +53,14 @@ GoogleStreetview {
   justify-content: center;
   height: 100%;
   background-color: aliceblue;
+}
+
+#round-info {
+  display: flex;
+  background-color: white;
+  justify-content: space-evenly;
+  position: fixed;
+  top: 20px;
+  left: 75%;
+  z-index: 100;
 }

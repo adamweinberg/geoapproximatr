@@ -35,7 +35,7 @@ const Map = (props) => {
   }, []);
 
   return (
-    <div style={{ height: "300px", width: "30%" }}>
+    <div id="map-container" style={{ height: "45vh", width: "30%" }}>
       {!location.latitude ? (
         <div id="loader"></div>
       ) : (
