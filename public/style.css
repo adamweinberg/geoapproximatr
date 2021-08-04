@@ -47,7 +47,7 @@ GoogleStreetview {
 
 #map-container {
   padding: 10px;
-  margin-bottom: 8%
+  margin-bottom: 4.5%
 }
 
 #loader {
@@ -62,7 +62,7 @@ GoogleStreetview {
   display: flex;
   justify-content: space-evenly;
   position: fixed;
-  top: 8%;
+  top: 18px;
   right: 15px;
   z-index: 100;
   background-color: #46237a;
@@ -120,5 +120,5 @@ GoogleStreetview {
 #submit-guess-button {
   position: absolute;
   right: 8%;
-  bottom: 7.5vh;
+  bottom: 18px;
 }
