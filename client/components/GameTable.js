@@ -9,7 +9,7 @@ import {
   TableBody,
 } from "@material-ui/core";
 
-const GameResult = (props) => {
+const GameTable = (props) => {
   const { score, distance } = props; //last round score and distance
   const { game } = useSelector((state) => state);
 
@@ -59,4 +59,4 @@ const GameResult = (props) => {
   );
 };
 
-export default GameResult;
+export default GameTable;
