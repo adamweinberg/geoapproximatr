@@ -60,24 +60,24 @@ GoogleStreetview {
 
 #round-and-score {
   display: flex;
-  background-color: white;
   justify-content: space-evenly;
   position: fixed;
   top: 8%;
-  right: 8%;
+  right: 15px;
   z-index: 100;
   background-color: #46237a;
-  height: 5rem;
+  height: 20vh;
   border-radius: 10px;
   font-family: 'Roboto';
-  border: 3px solid #9DECCA
+  width: 25%;
 }
 
 #round-info,#score-info {
   padding: .5rem;
   border-radius: 5px;
   background-color: #fcfcfc;
-  height: 2.5rem;
+  height: 50%;
+  width: 35%;
 }
 
 #round-info {
@@ -89,28 +89,32 @@ GoogleStreetview {
 }
 
 #round-info>label,#score-info>label {
-  font-size: 10px;
+  font-size: 14px;
   text-align: left;
   border-bottom: 2px solid #46237a;
   padding-bottom: .1rem;
 }
 
 #round-info>p,#score-info>p {
-  font-size: 22px;
+  font-size: 30px;
   color: #256eff;
   margin: 0;
   text-align: right;
-  padding-top: .25rem;
+  padding-top: .75rem;
 }
 
-#over-five {
-  font-size: 10px;
+.divisor {
+  font-size: 14px;
   color: black;
 }
 
 #submit-guess-button,#next-round-button {
   font-size: 18px;
   background-color: #3DDC97;
+}
+
+#submit-guess-button:hover,#next-round-button:hover {
+  background-color: #23BE7B;
 }
 
 #submit-guess-button {

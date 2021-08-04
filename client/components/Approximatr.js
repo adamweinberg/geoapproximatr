@@ -20,12 +20,14 @@ const Approximatr = (props) => {
         <div id='round-info'>
           <label>ROUND</label>
           <p>{roundNumber}
-            <span id='over-five'>/5</span>
+            <span className='divisor'>/5</span>
           </p>
         </div>
         <div id='score-info'>
           <label>SCORE</label>
-          <p>{totalScore}</p>
+          <p>{totalScore}
+            <span className='divisor'>/25000</span>
+          </p>
         </div>
       </div>
       <div id="sv-and-map">
