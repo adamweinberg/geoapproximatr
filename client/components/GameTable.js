@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import {
   TableContainer,
   Table,
@@ -10,10 +9,7 @@ import {
 } from "@material-ui/core";
 
 const GameTable = (props) => {
-  const { score, distance } = props; //last round score and distance
-  const { game } = useSelector((state) => state);
-
-  const totalScore = game.scores.reduce((curr, acc) => acc + curr) + score;
+  const { totalScore, game } = props
 
   return (
     <div>
@@ -41,11 +37,6 @@ const GameTable = (props) => {
                 </TableRow>
               );
             })}
-            <TableRow>
-              <TableCell>5</TableCell>
-              <TableCell align="center">{distance}</TableCell>
-              <TableCell align="right">{score}</TableCell>
-            </TableRow>
             <TableRow>
               <TableCell align="right" colSpan={2}>
                 Total Score:

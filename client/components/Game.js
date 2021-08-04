@@ -29,7 +29,9 @@ const Game = () => {
       return (
         <React.Fragment>
           <GameSummary handleNewGame={handleNewGame} />
-          <Button id='new-game-button' onClick={handleNewGame}>New Game</Button>
+          <Button id="new-game-button" onClick={handleNewGame}>
+            New Game
+          </Button>
         </React.Fragment>
       );
     } else if (step === 10) {
@@ -53,7 +55,7 @@ const Game = () => {
     } else {
       return (
         <React.Fragment>
-          <RoundResult activeStep={activeStep} />
+          <RoundResult />
           <Button id="next-round-button" onClick={handleSubmit}>
             Next Round
           </Button>

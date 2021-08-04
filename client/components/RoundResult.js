@@ -6,8 +6,7 @@ import { resetLocation } from "../store/location";
 import ResultMap from "./ResultMap";
 import BarGraph from "./BarGraph";
 
-const RoundResult = (props) => {
-  const { activeStep } = props;
+const RoundResult = () => {
   const dispatch = useDispatch();
   const { location, guess } = useSelector((state) => state);
 
@@ -29,11 +28,8 @@ const RoundResult = (props) => {
 
   useEffect(() => {
     return () => {
-      if (activeStep !== 10) {
-        //don't do it for the last round so we can start a new game... will need to figure out a workaround if i want to save total scores somewhere
-        dispatch(saveDistance(distanceRef.current)); //add distance and score to global state after unmount
-        dispatch(saveScore(scoreRef.current));
-      }
+      dispatch(saveDistance(distanceRef.current)); //add distance and score to global state after unmount
+      dispatch(saveScore(scoreRef.current));
       dispatch(resetLocation()); //clear the location for the next round
     };
   }, []);
