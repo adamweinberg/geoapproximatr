@@ -5,6 +5,7 @@ import { saveDistance, saveScore } from "../store/game";
 import { resetLocation } from "../store/location";
 import GameResult from "./GameResult";
 import ResultMap from './ResultMap'
+import BarGraph from "./BarGraph";
 
 const RoundResult = (props) => {
   const { activeStep } = props;
@@ -39,21 +40,21 @@ const RoundResult = (props) => {
 
   return (
     <div>
-      Round result
-      {distance > -1 && score > -1 ? (
-        <div id="round-results">
-          <div>Your guess was {distance} miles away from the location </div>
-          <div>You scored {score} points this round </div>
-        </div>
-      ) : (
-        <span>loading...</span>
-      )}
       <ResultMap location={location} guess={guess} distance={distance}/>
       {activeStep === 10 ? (
         <GameResult score={score} distance={distance} />
       ) : (
         <span></span>
       )}
+        {distance > -1 && score > -1 ? (
+          <div id="round-results">
+            <div>Your guess was <span className='result-value'>{distance} miles</span> away from the location.</div>
+            <div>You scored <span className='result-value'>{score} points</span> this round.</div>
+            <BarGraph score={score} />
+          </div>
+        ) : (
+          <span>loading...</span>
+        )}
     </div>
   );
 };

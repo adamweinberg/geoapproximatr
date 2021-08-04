@@ -110,15 +110,44 @@ GoogleStreetview {
 
 #submit-guess-button,#next-round-button {
   font-size: 18px;
-  background-color: #3DDC97;
 }
 
-#submit-guess-button:hover,#next-round-button:hover {
-  background-color: #23BE7B;
-}
 
 #submit-guess-button {
   position: absolute;
   right: 8%;
   bottom: 18px;
+  background-color: #3DDC97;
+}
+
+#submit-guess-button:hover {
+  background-color: #23BE7B;
+}
+
+#next-round-button {
+  position: absolute;
+  bottom: 18px;
+  left: 45%;
+  background-color: #46237a;
+  color: white;
+}
+
+#next-round-button:hover{
+  background-color: #2d174f;
+}
+
+#round-results {
+  margin: 1rem auto 1rem auto;
+  width: fit-content;
+  padding: 1rem;
+  background-color: #3DDC97;
+  border-radius: 10px;
+  font-family: 'Roboto';
+  font-size: 18px;
+  z-index: auto;
+}
+
+.result-value {
+  font-size: 22px;
+  color: #3649bd;
 }
