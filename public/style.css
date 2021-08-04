@@ -126,7 +126,7 @@ GoogleStreetview {
 
 #next-round-button {
   position: absolute;
-  bottom: 18px;
+  bottom: 5px;
   left: 45%;
   background-color: #46237a;
   color: white;
@@ -137,7 +137,7 @@ GoogleStreetview {
 }
 
 #round-results {
-  margin: 1rem auto 1rem auto;
+  margin: .8rem auto 1rem auto;
   width: fit-content;
   padding: 1rem;
   background-color: #3DDC97;
@@ -145,9 +145,16 @@ GoogleStreetview {
   font-family: 'Roboto';
   font-size: 18px;
   z-index: auto;
+  text-align: center;
 }
 
 .result-value {
   font-size: 22px;
   color: #3649bd;
+}
+
+#score-slider {
+  padding: 4px;
+  margin: 5px auto 5px auto;
+  background-color: #fcfcfc;
 }

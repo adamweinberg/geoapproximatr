@@ -24,7 +24,7 @@ const ResultMap = (props) => {
   };
 
   return (
-    <div style={{ height: "77vh", width: "100%" }}>
+    <div style={{ height: "75vh", width: "100%" }}>
       {!isNaN(defaultProps.zoom) ? (
         <GoogleMapReact
           bootstrapURLKeys={{ key: keys.maps }}
