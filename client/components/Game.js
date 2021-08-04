@@ -8,8 +8,6 @@ import { resetGuess } from "../store/guess";
 import { resetLocation } from "../store/location";
 import { Button } from "@material-ui/core";
 
-const rounds = 5;
-
 const Game = () => {
   const dispatch = useDispatch();
 
@@ -27,14 +25,14 @@ const Game = () => {
   };
 
   function getStepContent(step) {
-    if (step === rounds * 2 + 1) {
+    if (step === 11) {
       return (
         <React.Fragment>
           <GameSummary handleNewGame={handleNewGame} />
-          <Button onClick={handleNewGame}>New Game</Button>
+          <Button id='new-game-button' onClick={handleNewGame}>New Game</Button>
         </React.Fragment>
       );
-    } else if (step === rounds * 2) {
+    } else if (step === 10) {
       return (
         <React.Fragment>
           <RoundResult activeStep={activeStep} />
