@@ -38,6 +38,7 @@ GoogleStreetview {
 #sv-and-map {
   display: flex;
   margin: auto;
+  align-items: flex-end;
 }
 
 #sv-container {
@@ -45,7 +46,8 @@ GoogleStreetview {
 }
 
 #map-container {
-  padding: 10px
+  padding: 10px;
+  margin-bottom: 8%
 }
 
 #loader {
@@ -61,8 +63,8 @@ GoogleStreetview {
   background-color: white;
   justify-content: space-evenly;
   position: fixed;
-  top: 35px;
-  right: 29%;
+  top: 8%;
+  right: 8%;
   z-index: 100;
   background-color: #46237a;
   height: 5rem;
@@ -104,4 +106,15 @@ GoogleStreetview {
 #over-five {
   font-size: 10px;
   color: black;
+}
+
+#submit-guess-button,#next-round-button {
+  font-size: 18px;
+  background-color: #3DDC97;
+}
+
+#submit-guess-button {
+  position: absolute;
+  right: 8%;
+  bottom: 7.5vh;
 }

@@ -42,7 +42,7 @@ const Map = (props) => {
           <Loader type="Circles" color="#3649BD" height={100} width={100} />
         </div>
       ) : (
-        <div style={{ height: "300px", width: "100%" }}>
+        <div style={{ height: "45vh", width: "100%" }}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: API_KEY }}
             defaultCenter={defaultProps.center}

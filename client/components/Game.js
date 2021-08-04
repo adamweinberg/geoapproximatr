@@ -38,7 +38,7 @@ const Game = () => {
       <React.Fragment>
         {getStepContent(activeStep)}
         {activeStep !== rounds * 2 ?
-        (<Button onClick={handleSubmit}>
+        (<Button id={activeStep % 2 === 1 ? 'submit-guess-button' : 'next-round-button'} onClick={handleSubmit}>
           {activeStep % 2 === 1 ? "Submit Guess" : "Next Round"}
         </Button>) : (
           <Button onClick={handleNewGame}>New Game</Button>
