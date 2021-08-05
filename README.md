@@ -28,10 +28,16 @@ Then, navigate to http://localhost:8080 in your browser. You should now be playi
 - Redux
 - Google Maps API
 - Material-UI
-- react-google-map
-- react-google-streetview
-- react-loader-spinner
-- random-streetview
+- [google-map-react](https://www.npmjs.com/package/google-map-react)
+- [react-google-streetview](https://www.npmjs.com/package/react-google-streetview)
+- [random-streetview](https://www.npmjs.com/package/random-streetview)
+- [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner)
 
 ## Contributors
 - [Adam Weinberg](https://github.com/adamweinberg)
+
+## Future Updates
+In the relatively-near future, I'm planning on adding some more features to GeoApproximatr, including:
+- User account creation (much of the backend code needed for this is already in the repository - I just need to integrate it!)
+- Global and user-level high scores
+- Improved display for all screen sizes
