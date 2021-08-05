@@ -3,7 +3,7 @@ import GoogleMapReact from "google-map-react";
 import guessMarker from "../../public/guess-marker.png";
 import locationMarker from "../../public/location-marker.png";
 import { calculateMidpoint, getZoomLevel } from "../../script/calcs";
-import keys from "../../script/keys";
+import key from "../../script/key";
 
 const ResultMap = (props) => {
   const { location, guess } = props;
@@ -27,7 +27,7 @@ const ResultMap = (props) => {
     <div style={{ height: "75vh", width: "100%" }}>
       {!isNaN(defaultProps.zoom) ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: keys.maps }}
+          bootstrapURLKeys={{ key: key }}
           yesIWantToUseGoogleMapApiInternals
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}

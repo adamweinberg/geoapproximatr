@@ -201,3 +201,45 @@ GoogleStreetview {
   font-size: 20px;
   padding: 8px 10px;
 }
+
+#home-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-align: center;
+  color: #256eff;
+}
+
+
+#welcome {
+  font-size: 30px;
+  margin: 1rem;
+}
+
+#click-start {
+  font-size: 22px;
+  margin: 1rem;
+}
+
+#home-buttons {
+  font-size: 18px;
+  margin-top: 2rem;
+}
+
+#start-game-button {
+  background-color: #3ddc97;
+  margin-right: .5rem;
+}
+
+#start-game-button:hover {
+  background-color: #23be7b;
+}
+
+#how-to-play-button {
+  color: #fcfcfc;
+  background-color: #46237a;
+  margin-left: .5rem;
+}
+
+#how-to-play-button:hover {
+  background-color: #2d174f;
+}
+

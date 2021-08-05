@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import StreetView from "./StreetView";
 import Map from "./Map";
-import keys from '../../script/keys';
+import key from '../../script/key';
 
 const Approximatr = (props) => {
   const { game } = useSelector(state => state)
@@ -31,8 +31,8 @@ const Approximatr = (props) => {
         </div>
       </div>
       <div id="sv-and-map">
-        <StreetView API_KEY={keys.streetview} />
-        <Map API_KEY={keys.maps} activeStep={activeStep} />
+        <StreetView API_KEY={key} />
+        <Map API_KEY={key} activeStep={activeStep} />
       </div>
     </div>
   );
