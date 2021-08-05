@@ -227,6 +227,11 @@ GoogleStreetview {
 #start-game-button {
   background-color: #3ddc97;
   margin-right: .5rem;
+  color: black;
+}
+
+#start-game-button * {
+  color: black;
 }
 
 #start-game-button:hover {
@@ -234,9 +239,12 @@ GoogleStreetview {
 }
 
 #how-to-play-button {
-  color: #fcfcfc;
   background-color: #46237a;
   margin-left: .5rem;
+}
+
+#how-to-play-button * {
+  color: #fcfcfc;
 }
 
 #how-to-play-button:hover {

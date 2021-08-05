@@ -5,6 +5,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
 import Game from './components/Game'
+import Instructions from './components/Instructions';
 
 /**
  * COMPONENT
@@ -25,6 +26,9 @@ const Routes = () => {
         </Route>
         <Route path="/game">
           <Game />
+        </Route>
+        <Route path='/instructions'>
+          <Instructions />
         </Route>
       </Switch>
     </div>

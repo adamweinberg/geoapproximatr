@@ -13,7 +13,9 @@ const Home = () => {
         <Button id="start-game-button">
           <Link to="/game">Start Game</Link>
         </Button>
-        <Button id="how-to-play-button">How To play</Button>
+        <Button id="how-to-play-button">
+          <Link to='/instructions'>How to Play</Link>
+        </Button>
       </div>
     </div>
   );
