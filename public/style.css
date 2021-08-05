@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: "Roboto";
   background-color: #fcfcfc;
 }
 
@@ -23,15 +23,15 @@ form div {
 
 GoogleStreetview {
   width: 100%;
-  height: 1400px
+  height: 1400px;
 }
 
 #home-container {
   width: 100%;
-  height: 100vh
+  height: 100vh;
 }
 
-#home-container> {
+#home-container > {
   text-decoration: none;
 }
 
@@ -42,12 +42,12 @@ GoogleStreetview {
 }
 
 #sv-container {
-  padding: 10px
+  padding: 10px;
 }
 
 #map-container {
   padding: 10px;
-  margin-bottom: 4.5%
+  margin-bottom: 4.5%;
 }
 
 #loader {
@@ -55,7 +55,7 @@ GoogleStreetview {
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: #9DECCA;
+  background-color: #9decca;
 }
 
 #round-and-score {
@@ -68,12 +68,13 @@ GoogleStreetview {
   background-color: #46237a;
   height: 20vh;
   border-radius: 10px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   width: 25%;
 }
 
-#round-info,#score-info {
-  padding: .5rem;
+#round-info,
+#score-info {
+  padding: 0.5rem;
   border-radius: 5px;
   background-color: #fcfcfc;
   height: 50%;
@@ -81,26 +82,28 @@ GoogleStreetview {
 }
 
 #round-info {
-  margin: auto .5rem auto 1rem
+  margin: auto 0.5rem auto 1rem;
 }
 
 #score-info {
-  margin: auto 1rem auto .5rem;
+  margin: auto 1rem auto 0.5rem;
 }
 
-#round-info>label,#score-info>label {
+#round-info > label,
+#score-info > label {
   font-size: 14px;
   text-align: left;
   border-bottom: 2px solid #46237a;
-  padding-bottom: .1rem;
+  padding-bottom: 0.1rem;
 }
 
-#round-info>p,#score-info>p {
+#round-info > p,
+#score-info > p {
   font-size: 30px;
   color: #256eff;
   margin: 0;
   text-align: right;
-  padding-top: .75rem;
+  padding-top: 0.75rem;
 }
 
 .divisor {
@@ -108,41 +111,46 @@ GoogleStreetview {
   color: black;
 }
 
-#submit-guess-button,#next-round-button {
+#submit-guess-button,
+#next-round-button {
   font-size: 18px;
 }
-
 
 #submit-guess-button {
   position: absolute;
   right: 8%;
   bottom: 18px;
-  background-color: #3DDC97;
+  background-color: #3ddc97;
 }
 
 #submit-guess-button:hover {
-  background-color: #23BE7B;
+  background-color: #23be7b;
 }
 
-#next-round-button {
+#next-round-button,
+#new-game-button {
   position: absolute;
-  bottom: 5px;
-  left: 45%;
   background-color: #46237a;
   color: white;
 }
 
-#next-round-button:hover{
+#next-round-button:hover,
+#new-game-button:hover {
   background-color: #2d174f;
 }
 
+#next-round-button {
+  bottom: 5px;
+  left: 45%;
+}
+
 #round-results {
-  margin: .8rem auto 1rem auto;
+  margin: 0.8rem auto 1rem auto;
   width: fit-content;
   padding: 1rem;
-  background-color: #3DDC97;
+  background-color: #3ddc97;
   border-radius: 10px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 18px;
   z-index: auto;
   text-align: center;
@@ -153,8 +161,43 @@ GoogleStreetview {
   color: #3649bd;
 }
 
-#score-slider {
+#score-slider,
+#final-score-slider {
   padding: 4px;
   margin: 5px auto 5px auto;
   background-color: #fcfcfc;
+}
+
+#game-summary {
+  width: 66%;
+  margin: auto;
+  background-color: #9decca;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+#final-score {
+  font-size: 26px;
+  color: #3649bd;
+}
+
+#final-score-slider {
+  width: 33%;
+}
+
+#game-table {
+  background-color: #fcfcfc;
+  padding: 10px;
+  width: 95%;
+  margin: 1rem auto 0;
+  border-radius: 10px;
+}
+
+#new-game-button {
+  top: 580px;
+  left: 46%;
+  font-size: 20px;
+  padding: 8px 10px;
 }

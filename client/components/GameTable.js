@@ -7,17 +7,30 @@ import {
   TableCell,
   TableBody,
 } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+
+const StyledTableRow = withStyles(() => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: "#DDF8EC",
+    },
+  },
+}))(TableRow);
 
 const GameTable = (props) => {
-  const { totalScore, game } = props
+  const { totalScore, distances, scores } = props;
 
   return (
     <div>
-      <TableContainer>
+      <TableContainer id="game-table">
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center" colSpan={3}>
+              <TableCell
+                align="center"
+                colSpan={3}
+                style={{ fontSize: "22px" }}
+              >
                 Game Summary
               </TableCell>
             </TableRow>
@@ -28,21 +41,30 @@ const GameTable = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {game.distances.map((distance, index) => {
+            {distances.map((distance, index) => {
               return (
-                <TableRow key={index}>
+                <StyledTableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell align="center">{distance}</TableCell>
-                  <TableCell align="right">{game.scores[index]}</TableCell>
-                </TableRow>
+                  <TableCell align="right">{scores[index]}</TableCell>
+                </StyledTableRow>
               );
             })}
-            <TableRow>
-              <TableCell align="right" colSpan={2}>
+            <StyledTableRow>
+              <TableCell
+                align="right"
+                colSpan={2}
+                style={{ textDecoration: "bold" }}
+              >
                 Total Score:
               </TableCell>
-              <TableCell align="right">{totalScore}</TableCell>
-            </TableRow>
+              <TableCell
+                align="right"
+                style={{ fontSize: "18px", color: "#3649bd" }}
+              >
+                {totalScore}
+              </TableCell>
+            </StyledTableRow>
           </TableBody>
         </Table>
       </TableContainer>

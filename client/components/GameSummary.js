@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import BarGraph from "./BarGraph";
 import GameTable from "./GameTable";
 
 const GameSummary = () => {
@@ -8,9 +9,16 @@ const GameSummary = () => {
   const totalScore = game.scores.reduce((curr, acc) => acc + curr);
 
   return (
-    <div>
-      Your total score was {totalScore}! Nice job!
-      <GameTable totalScore={totalScore} game={game} />
+    <div id="game-summary">
+      <div>
+        Your final score is <span id="final-score">{totalScore}</span>
+      </div>
+      <BarGraph score={totalScore} isFinalScore={true} />
+      <GameTable
+        totalScore={totalScore}
+        distances={game.distances}
+        scores={game.scores}
+      />
     </div>
   );
 };

@@ -1,12 +1,26 @@
-import React from 'react'
-import { LinearProgress } from '@material-ui/core'
+import React from "react";
+import { LinearProgress } from "@material-ui/core";
 
 const BarGraph = (props) => {
-  const { score } = props
+  const { score, isFinalScore } = props;
 
   return (
-    <LinearProgress id='score-slider' variant="determinate" value={score / 50} /> //value = score * 100 / possible 5000
-  )
-}
+    <React.Fragment>
+      {isFinalScore ? (
+        <LinearProgress
+          id="final-score-slider"
+          variant="determinate"
+          value={score / 250} //total score * 100 / 25000
+        />
+      ) : (
+        <LinearProgress
+          id="score-slider"
+          variant="determinate"
+          value={score / 50} //round score * 100 / 5000
+        />
+      )}
+    </React.Fragment>
+  );
+};
 
-export default BarGraph
+export default BarGraph;
