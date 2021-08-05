@@ -1,8 +1,20 @@
 # GeoApproximatr
 
+![logo](https://user-images.githubusercontent.com/54007795/128434212-9c7b35db-1308-414c-b8ad-05443825846e.png)
+
+
 GeoApproximatr is a clone of the game [Geoguessr](http://geoguessr.com), where a player is given a random Google Streetview location and they must guess where the location is on a map. Points are awarded based on how close the player's guess is to the actual location.
 
 Below are a few screenshots and gifs from the game.
+
+Game screen:
+![image](https://user-images.githubusercontent.com/54007795/128434065-73e2a517-5d03-4bf0-9011-80a5f2aa46cc.png)
+
+Round result:
+![image](https://user-images.githubusercontent.com/54007795/128434118-00a21ede-e2fd-4c0c-b5b4-b0d37e5ca252.png)
+
+Game result:
+![image](https://user-images.githubusercontent.com/54007795/128434166-608a065c-3429-4f9f-86c0-4b1d49b1d0c5.png)
 
 ## Setup Instructions
 
