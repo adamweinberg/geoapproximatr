@@ -19,7 +19,7 @@ Game result:
 ## Setup Instructions
 
 ### Installation
-git clone the repository. Then, from the command line, run:
+git clone the repository. Then, from the command line, run
 `npm install`
 
 ### API Key
