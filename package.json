@@ -13,7 +13,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
-    },
+  },
   "author": "Adam Weinberg",
   "license": "MIT",
   "dependencies": {
@@ -33,6 +33,7 @@
     "react-google-maps": "^9.4.5",
     "react-google-streetview": "0.0.9",
     "react-loader-spinner": "^4.0.0",
+    "react-scripts": "^4.0.3",
     "react-streetview": "^1.1.1",
     "sequelize": "^6.3.5",
     "serve": "^12.0.1",
