@@ -7,20 +7,14 @@
     "node": "14.16.0"
   },
   "scripts": {
-    "build": "webpack",
-    "build:dev": "npm run build -- --watch --mode=development",
-    "seed": "node script/seed.js",
-    "start": "node server",
-    "start:dev": "npm run build:dev & npm run start-server",
-    "start:dev:logger": "LOGGING=true npm run start:dev",
-    "start:dev:seed": "SEED=true npm run start:dev",
-    "start-server": "JWT=shh nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV=test JWT=a_secret mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" --require @babel/register --require esm ",
-    "test:dev": "npm run test -- --watch",
-    "test:dev:models": "npm run test:dev -- --grep=model",
-    "test:dev:routes": "npm run test:dev -- --grep=route"
-  },
-  "author": "Fullstack Academy of Code",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
+    },
+  "author": "Adam Weinberg",
   "license": "MIT",
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.12.1",
@@ -41,6 +35,7 @@
     "react-loader-spinner": "^4.0.0",
     "react-streetview": "^1.1.1",
     "sequelize": "^6.3.5",
+    "serve": "^12.0.1",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
