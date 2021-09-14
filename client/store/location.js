@@ -1,4 +1,5 @@
-import randomStreetView from '../../script/random-streetview/index.js'
+import randomStreetView from '../../script/random-streetview'
+//import randomStreetView from 'random-streetview'
 
 //ACTION TYPE
 export const GOT_LOCATION = 'GOT_LOCATION'
