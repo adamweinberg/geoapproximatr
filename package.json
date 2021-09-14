@@ -33,6 +33,7 @@
     "google-map-react": "^2.1.10",
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
+    "load-google-maps-api": "^2.0.2",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
     "react-google-maps": "^9.4.5",
