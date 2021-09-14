@@ -3,6 +3,9 @@
   "version": "2.0.0",
   "description": "GeoApproximatr",
   "main": "index.js",
+  "engines": {
+    "node": "14.16.0"
+  },
   "scripts": {
     "build": "webpack",
     "build:dev": "npm run build -- --watch --mode=development",
@@ -32,7 +35,6 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
-    "random-streetview": "^1.1.1",
     "react-google-maps": "^9.4.5",
     "react-google-streetview": "0.0.9",
     "react-loader-spinner": "^4.0.0",
