@@ -40,7 +40,6 @@
     "react-google-maps": "^9.4.5",
     "react-google-streetview": "0.0.9",
     "react-loader-spinner": "^4.0.0",
-    "react-streetview": "^1.1.1",
     "sequelize": "^6.3.5",
     "url-loader": "^4.1.1"
   },
