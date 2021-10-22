@@ -16,6 +16,9 @@ Round result:
 Game result:
 ![image](https://user-images.githubusercontent.com/54007795/128434166-608a065c-3429-4f9f-86c0-4b1d49b1d0c5.png)
 
+## Deployed Site
+GeoApproximatr is deployed at [https://geoapproximatr.netlify.app/](https://geoapproximatr.netlify.app/)
+
 ## Setup Instructions
 
 ### Installation
@@ -25,9 +28,7 @@ git clone the repository. Then, from the command line, run
 ### API Key
 This application requires the [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/overview). Create your own API key by following the instructions [here](https://developers.google.com/maps/documentation/javascript/get-api-key).
 
-Once you have your API key, add it to the `key` variable found in /script/key.js
-
-![image](https://user-images.githubusercontent.com/54007795/128431645-dfdf258b-dd57-4b51-9d8d-c04390b49165.png)
+Once you have your API key, create a .env file. Inside the .env file, add the following code (replacing [YOUR API KEY] with the API key you generated): `REACT_APP_API_KEY=[YOUR API KEY]`
 
 ### Start the Server
 From the command line, run `npm run start:dev`
