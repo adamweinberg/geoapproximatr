@@ -1,6 +1,5 @@
 import loadGoogleMapsApi from 'load-google-maps-api'
 import EventEmitter from "events";
-import key from '../../script/key'
 
 class Google extends EventEmitter {
     constructor() {
@@ -18,7 +17,7 @@ class Google extends EventEmitter {
         this.initCalled = true;
         loadGoogleMapsApi({
             libraries: ['geometry'],
-            key: key
+            key: process.env.API_KEY
         }).then(googleMaps => {
             this.maps = googleMaps;
             this.emit('maps');

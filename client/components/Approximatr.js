@@ -2,13 +2,14 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import StreetView from "./StreetView";
 import Map from "./Map";
-import key from '../../script/key';
 
 const Approximatr = (props) => {
   const { game } = useSelector(state => state)
   const { activeStep } = props
   let totalScore = 0
   let roundNumber = Math.ceil(activeStep / 2)
+
+  const key = process.env.API_KEY
 
   if ( game.scores.length > 0 ) {
     totalScore = game.scores.reduce((curr, acc) => acc + curr)

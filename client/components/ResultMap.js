@@ -3,10 +3,10 @@ import GoogleMapReact from "google-map-react";
 import guessMarker from "../../public/guess-marker.png";
 import locationMarker from "../../public/location-marker.png";
 import { calculateMidpoint, getZoomLevel } from "../../script/calcs";
-import key from "../../script/key";
 
 const ResultMap = (props) => {
   const { location, guess } = props;
+  const key = process.env.API_KEY
 
   const midpoint = calculateMidpoint(guess, location);
 
