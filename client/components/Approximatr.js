@@ -9,7 +9,7 @@ const Approximatr = (props) => {
   let totalScore = 0
   let roundNumber = Math.ceil(activeStep / 2)
 
-  const key = process.env.API_KEY
+  const key = process.env.REACT_APP_API_KEY
 
   if ( game.scores.length > 0 ) {
     totalScore = game.scores.reduce((curr, acc) => acc + curr)

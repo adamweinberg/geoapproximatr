@@ -6,7 +6,7 @@ import { calculateMidpoint, getZoomLevel } from "../../script/calcs";
 
 const ResultMap = (props) => {
   const { location, guess } = props;
-  const key = process.env.API_KEY
+  const key = process.env.REACT_APP_API_KEY
 
   const midpoint = calculateMidpoint(guess, location);
 
