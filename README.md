@@ -2,6 +2,8 @@
 
 ![logo](https://user-images.githubusercontent.com/54007795/128434212-9c7b35db-1308-414c-b8ad-05443825846e.png)
 
+GeoApproximatr is deployed at [https://geoapproximatr.netlify.app/](https://geoapproximatr.netlify.app/). Try it out for yourself!
+
 
 GeoApproximatr is a clone of the game [Geoguessr](http://geoguessr.com), where a player is given a random Google Streetview location and they must guess where the location is on a map. Points are awarded based on how close the player's guess is to the actual location.
 
@@ -15,9 +17,6 @@ Round result:
 
 Game result:
 ![image](https://user-images.githubusercontent.com/54007795/128434166-608a065c-3429-4f9f-86c0-4b1d49b1d0c5.png)
-
-## Deployed Site
-GeoApproximatr is deployed at [https://geoapproximatr.netlify.app/](https://geoapproximatr.netlify.app/)
 
 ## Setup Instructions
 
