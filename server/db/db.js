@@ -20,6 +20,8 @@ if(process.env.DATABASE_URL){
   };
 }
 
-const db = new Sequelize(
-  process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`, config)
+// Check for both DATABASE_URL and NETLIFY_DATABASE_URL (Neon extension creates the latter)
+const databaseUrl = process.env.DATABASE_URL || process.env.NETLIFY_DATABASE_URL || `postgres://localhost:5432/${databaseName}`;
+
+const db = new Sequelize(databaseUrl, config)
 module.exports = db
