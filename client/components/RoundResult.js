@@ -43,10 +43,10 @@ const RoundResult = ({ activeStep }) => {
       dispatch(saveDistance(distanceRef.current)); //add distance and score to global state after unmount
       dispatch(saveScore(scoreRef.current));
       
-      // Only save round data if we have valid captured data and haven't already saved 5 rounds
+      // Save round data for all 5 rounds, but ensure we don't save more than 5 total
       if (locationRef.current && guessRef.current && distanceRef.current !== null && scoreRef.current !== null && game.rounds.length < 5) {
-        console.log('Saving round data:', {
-          roundNumber: game.rounds.length + 1,
+        const roundNumber = Math.ceil((activeStep || 0) / 2);
+        console.log('Saving round data for round:', roundNumber, 'current rounds saved:', game.rounds.length, {
           location: locationRef.current,
           guess: guessRef.current,
           distance: distanceRef.current,

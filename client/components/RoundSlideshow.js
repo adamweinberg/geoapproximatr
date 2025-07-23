@@ -105,14 +105,21 @@ const RoundSlideshow = ({ rounds }) => {
 
       setMarkers(newMarkers);
 
-      // Fit bounds to show both markers
+      // Fit bounds to show both markers with proper padding
       if (newMarkers.length === 2) {
         const bounds = new window.google.maps.LatLngBounds();
         newMarkers.forEach(marker => bounds.extend(marker.getPosition()));
-        map.fitBounds(bounds);
         
-        // Add some padding
-        const listener = window.google.maps.event.addListenerOnce(map, "idle", () => {
+        // Fit bounds with padding
+        map.fitBounds(bounds, {
+          top: 50,
+          right: 50,
+          bottom: 50,
+          left: 50
+        });
+        
+        // Set maximum zoom level to prevent zooming in too close
+        const listener = window.google.maps.event.addListenerOnce(map, "bounds_changed", () => {
           if (map.getZoom() > 15) {
             map.setZoom(15);
           }

@@ -9,10 +9,17 @@ const GameSummary = () => {
   const { game, auth } = useSelector((state) => state);
   const [gameSaved, setGameSaved] = useState(false);
 
-  const totalScore = game.scores.reduce((curr, acc) => acc + curr);
-  const averageScore = Math.round(totalScore / game.scores.length);
-  const bestRound = Math.max(...game.scores);
-  const worstRound = Math.min(...game.scores);
+  // Reset gameSaved flag when game arrays are reset (new game started)
+  useEffect(() => {
+    if (game.scores.length === 0 && game.distances.length === 0) {
+      setGameSaved(false);
+    }
+  }, [game.scores.length, game.distances.length]);
+
+  const totalScore = game.scores.length > 0 ? game.scores.reduce((curr, acc) => acc + curr, 0) : 0;
+  const averageScore = game.scores.length > 0 ? Math.round(totalScore / game.scores.length) : 0;
+  const bestRound = game.scores.length > 0 ? Math.max(...game.scores) : 0;
+  const worstRound = game.scores.length > 0 ? Math.min(...game.scores) : 0;
 
   // Save game to database if user is logged in
   useEffect(() => {
@@ -22,10 +29,11 @@ const GameSummary = () => {
         gameSaved,
         scoresLength: game.scores.length,
         distancesLength: game.distances.length,
-        roundsLength: game.rounds.length
+        roundsLength: game.rounds.length,
+        totalScore
       });
       
-      if (auth.id && !gameSaved && game.scores.length === 5 && game.distances.length === 5) {
+      if (auth.id && !gameSaved && game.scores.length === 5 && game.distances.length === 5 && totalScore > 0) {
         console.log('Attempting to save game...');
         try {
           const token = window.localStorage.getItem('token');
