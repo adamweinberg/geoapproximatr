@@ -10,6 +10,7 @@ const Navbar = ({handleClick, isLoggedIn, isGamePage}) => (
         {isGamePage ? 'GA' : 'GeoApproximatr'}
       </Link>
       <div className="nav-links">
+        <Link to="/leaderboard">Leaderboard</Link>
         {isLoggedIn ? (
           <>
             <Link to="/">Home</Link>

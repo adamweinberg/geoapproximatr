@@ -6,6 +6,7 @@ import Home from './components/Home';
 import {me} from './store'
 import Game from './components/Game'
 import UserDashboard from './components/UserDashboard'
+import GlobalHighScores from './components/GlobalHighScores'
 import Navbar from './components/Navbar'
 
 /**
@@ -41,6 +42,9 @@ const Routes = () => {
         </Route>
         <Route path="/dashboard">
           {isLoggedIn ? <UserDashboard /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/leaderboard">
+          <GlobalHighScores />
         </Route>
       </Switch>
     </div>

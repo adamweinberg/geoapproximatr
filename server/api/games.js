@@ -1,6 +1,72 @@
 const router = require('express').Router()
 const { models: { Game, User }} = require('../db')
+const { Op } = require('sequelize')
 module.exports = router
+
+// Global high scores - no authentication required
+router.get('/global/all-time', async (req, res, next) => {
+  try {
+    const games = await Game.findAll({
+      include: [{
+        model: User,
+        attributes: ['username']
+      }],
+      order: [['totalScore', 'DESC']],
+      limit: 20
+    })
+    res.json(games)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/global/30-days', async (req, res, next) => {
+  try {
+    const thirtyDaysAgo = new Date()
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+    
+    const games = await Game.findAll({
+      include: [{
+        model: User,
+        attributes: ['username']
+      }],
+      where: {
+        completedAt: {
+          [Op.gte]: thirtyDaysAgo
+        }
+      },
+      order: [['totalScore', 'DESC']],
+      limit: 20
+    })
+    res.json(games)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/global/24-hours', async (req, res, next) => {
+  try {
+    const twentyFourHoursAgo = new Date()
+    twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24)
+    
+    const games = await Game.findAll({
+      include: [{
+        model: User,
+        attributes: ['username']
+      }],
+      where: {
+        completedAt: {
+          [Op.gte]: twentyFourHoursAgo
+        }
+      },
+      order: [['totalScore', 'DESC']],
+      limit: 20
+    })
+    res.json(games)
+  } catch (err) {
+    next(err)
+  }
+})
 
 // Middleware to require authentication
 const requireAuth = async (req, res, next) => {
