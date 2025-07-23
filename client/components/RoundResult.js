@@ -7,9 +7,9 @@ import { resetGuess } from "../store/guess";
 import ResultMap from "./ResultMap";
 import BarGraph from "./BarGraph";
 
-const RoundResult = () => {
+const RoundResult = ({ activeStep }) => {
   const dispatch = useDispatch();
-  const { location, guess } = useSelector((state) => state);
+  const { location, guess, game } = useSelector((state) => state);
 
   const [distance, setDistance] = useState(null);
   const [score, setScore] = useState(null);
@@ -43,8 +43,15 @@ const RoundResult = () => {
       dispatch(saveDistance(distanceRef.current)); //add distance and score to global state after unmount
       dispatch(saveScore(scoreRef.current));
       
-      // Only save round data if we have valid captured data
-      if (locationRef.current && guessRef.current && distanceRef.current !== null && scoreRef.current !== null) {
+      // Save round data for all 5 rounds, but ensure we don't save more than 5 total
+      if (locationRef.current && guessRef.current && distanceRef.current !== null && scoreRef.current !== null && game.rounds.length < 5) {
+        const roundNumber = Math.ceil((activeStep || 0) / 2);
+        console.log('Saving round data for round:', roundNumber, 'current rounds saved:', game.rounds.length, {
+          location: locationRef.current,
+          guess: guessRef.current,
+          distance: distanceRef.current,
+          score: scoreRef.current
+        });
         dispatch(saveRoundData({
           location: locationRef.current,
           guess: guessRef.current,

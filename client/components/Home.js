@@ -1,20 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import logo from "../../public/logo.png";
 
 const Home = () => {
+  const { id: isLoggedIn, username } = useSelector(state => state.auth);
+
   return (
     <div id="home-container">
       <img src={logo} alt="GeoApproximatr Logo" />
-      <h1 id="welcome">Welcome to GeoApproximatr</h1>
+      <h1 id="welcome">
+        {isLoggedIn ? `Welcome back, ${username}!` : 'Welcome to GeoApproximatr'}
+      </h1>
       <p id="click-start">Discover the world through street views and test your geographic knowledge</p>
       <div id="home-buttons">
         <Link to="/game" className="btn btn-accent">
           Start Game
         </Link>
-        <button className="btn btn-primary">
-          How to Play
-        </button>
+        {isLoggedIn ? (
+          <Link to="/dashboard" className="btn btn-primary">
+            View Dashboard
+          </Link>
+        ) : (
+          <>
+            <Link to="/login" className="btn btn-primary">
+              Login
+            </Link>
+            <Link to="/signup" className="btn btn-secondary">
+              Sign Up
+            </Link>
+          </>
+        )}
       </div>
       <div className="features-grid">
         <div className="feature-card glass-card">
@@ -29,8 +45,8 @@ const Home = () => {
         </div>
         <div className="feature-card glass-card">
           <div className="feature-icon">🏆</div>
-          <h3>Score & Compete</h3>
-          <p>Track your progress and challenge yourself</p>
+          <h3>Track & Compete</h3>
+          <p>Save your high scores and review past games</p>
         </div>
       </div>
     </div>

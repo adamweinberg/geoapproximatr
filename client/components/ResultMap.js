@@ -29,8 +29,28 @@ const ResultMap = (props) => {
     mapRef.current = map;
     mapsRef.current = maps;
     
-    // Draw line between guess and actual location
     if (guess.latitude !== null && guess.longitude !== null && location.latitude && location.longitude) {
+      // Use fitBounds to properly show both markers
+      const bounds = new maps.LatLngBounds();
+      bounds.extend(new maps.LatLng(guess.latitude, guess.longitude));
+      bounds.extend(new maps.LatLng(location.latitude, location.longitude));
+      
+      // Fit the map to show both points with padding
+      map.fitBounds(bounds, {
+        top: 50,
+        right: 50,
+        bottom: 50,
+        left: 50
+      });
+      
+      // Set a maximum zoom level to prevent zooming in too close
+      const listener = maps.event.addListenerOnce(map, 'bounds_changed', () => {
+        if (map.getZoom() > 15) {
+          map.setZoom(15);
+        }
+      });
+
+      // Draw line between guess and actual location
       const lineCoordinates = [
         { lat: guess.latitude, lng: guess.longitude },
         { lat: location.latitude, lng: location.longitude }
