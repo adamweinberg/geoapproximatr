@@ -36,13 +36,13 @@ const Map = (props) => {
   }, []);
 
   return (
-    <div id="map-container" style={{ height: "45vh", width: "30%" }}>
+    <div id="map-container">
       {!location.latitude && activeStep===1 ? ( //show spinner on first round to prevent invisible map
         <div id="loader">
           <Loader type="Circles" color="#3649BD" height={100} width={100} />
         </div>
       ) : (
-        <div style={{ height: "45vh", width: "100%" }}>
+        <div className="map-content">
           <GoogleMapReact
             bootstrapURLKeys={{ key: API_KEY }}
             defaultCenter={defaultProps.center}
@@ -54,9 +54,12 @@ const Map = (props) => {
               src={guessMarker}
               lat={guess.latitude}
               lng={guess.longitude}
-              height="30px"
-              width="30px"
-              style={{ transform: "translate(-15px, -30px)" }}
+              height="35px"
+              width="35px"
+              style={{ 
+                transform: "translate(-17px, -35px)",
+                filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4))"
+              }}
             />
           </GoogleMapReact>
         </div>

@@ -17,23 +17,31 @@ const Approximatr = (props) => {
 
   return (
     <div id="approximatr-container">
-      <div id="round-and-score">
-        <div id='round-info'>
-          <label>ROUND</label>
-          <p>{roundNumber}
-            <span className='divisor'>/5</span>
-          </p>
-        </div>
-        <div id='score-info'>
-          <label>SCORE</label>
-          <p>{totalScore}
-            <span className='divisor'>/25000</span>
-          </p>
+      <div id="game-header">
+        <div id="round-and-score">
+          <div className="score-card">
+            <label>Round</label>
+            <div className="value">
+              {roundNumber}
+              <span className="divisor">/5</span>
+            </div>
+          </div>
+          <div className="score-card">
+            <label>Score</label>
+            <div className="value">
+              {totalScore.toLocaleString()}
+              <span className="divisor">/25,000</span>
+            </div>
+          </div>
         </div>
       </div>
       <div id="sv-and-map">
-        <StreetView API_KEY={key} />
-        <Map API_KEY={key} activeStep={activeStep} />
+        <div id="sv-container">
+          <StreetView API_KEY={key} />
+        </div>
+        <div id="map-container">
+          <Map API_KEY={key} activeStep={activeStep} />
+        </div>
       </div>
     </div>
   );

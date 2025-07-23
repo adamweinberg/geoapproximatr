@@ -26,7 +26,7 @@ const StreetView = (props) => {
   };
 
   return (
-    <div id="sv-container" style={{ height: "95vh", width: "85%" }}>
+    <div id="sv-container">
       {!location.latitude ? (
         <div id="loader">
           <Loader type="Puff" color="#3649BD" height={100} width={100} />

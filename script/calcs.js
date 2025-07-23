@@ -1,6 +1,15 @@
 export function calculateDistance(guess, location) {
   //calculate distance between two sets of coordinates using haversine formula. adapted from http://www.movable-type.co.uk/scripts/latlong.html
 
+  // Check for valid inputs
+  if (!guess || !location || 
+      guess.latitude === null || guess.longitude === null ||
+      location.latitude === null || location.longitude === null ||
+      isNaN(guess.latitude) || isNaN(guess.longitude) ||
+      isNaN(location.latitude) || isNaN(location.longitude)) {
+    return null;
+  }
+
   const R = 6371; //radius of earth in km
   const dLat = deg2rad(location.latitude - guess.latitude);
   const dLon = deg2rad(location.longitude - guess.longitude);
@@ -16,7 +25,7 @@ export function calculateDistance(guess, location) {
 
   let d = R * c; //distance in km
   d *= 0.621371; //distance in mi
-  return d.toFixed(0);
+  return Math.round(d); // Return number instead of string
 }
 
 function deg2rad(deg) {
@@ -25,6 +34,12 @@ function deg2rad(deg) {
 
 export function calculateScore(guess, location) {
   let distance = calculateDistance(guess, location);
+  
+  // If distance calculation failed, return null
+  if (distance === null) {
+    return null;
+  }
+  
   distance = distance * 1.609
 
   //const zeroScoreDistance = 4000; //the maximum distance that allows for points to be awarded
