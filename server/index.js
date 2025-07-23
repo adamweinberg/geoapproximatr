@@ -8,16 +8,23 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 const init = async () => {
   try {
+    console.log('Starting server initialization...');
+    console.log('DATABASE_URL configured:', !!process.env.DATABASE_URL);
+    console.log('JWT configured:', !!process.env.JWT);
+    
     if(process.env.SEED === 'true'){
       await seed();
     }
     else {
-      await db.sync()
+      console.log('Syncing database...');
+      await db.sync({ alter: true });
+      console.log('✅ Database sync completed');
     }
     // start listening (and create a 'server' object representing our server)
-    app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`))
   } catch (ex) {
-    console.log(ex)
+    console.error('❌ Server initialization failed:', ex);
+    process.exit(1);
   }
 }
 

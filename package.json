@@ -11,6 +11,8 @@
     "build:dev": "npm run build -- --watch --mode=development",
     "seed": "node script/seed.js",
     "sync-db": "node script/sync-db.js",
+    "setup-db": "node script/setup-production-db.js",
+    "postbuild": "echo 'Build completed. Database will sync on server start.'",
     "start": "node server",
     "start:dev": "npm run build:dev & npm run start-server",
     "start:dev:logger": "LOGGING=true npm run start:dev",
