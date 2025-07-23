@@ -1,16 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import axios from "axios";
 import BarGraph from "./BarGraph";
 import GameTable from "./GameTable";
 import RoundSlideshow from "./RoundSlideshow";
 
 const GameSummary = () => {
-  const { game } = useSelector((state) => state);
+  const { game, auth } = useSelector((state) => state);
+  const [gameSaved, setGameSaved] = useState(false);
 
   const totalScore = game.scores.reduce((curr, acc) => acc + curr);
   const averageScore = Math.round(totalScore / game.scores.length);
   const bestRound = Math.max(...game.scores);
   const worstRound = Math.min(...game.scores);
+
+  // Save game to database if user is logged in
+  useEffect(() => {
+    const saveGame = async () => {
+      console.log('GameSummary save check:', {
+        authId: auth.id,
+        gameSaved,
+        scoresLength: game.scores.length,
+        distancesLength: game.distances.length,
+        roundsLength: game.rounds.length
+      });
+      
+      if (auth.id && !gameSaved && game.scores.length === 5 && game.distances.length === 5) {
+        console.log('Attempting to save game...');
+        try {
+          const token = window.localStorage.getItem('token');
+          const response = await axios.post('/api/games', {
+            totalScore,
+            rounds: game.rounds,
+            distances: game.distances,
+            scores: game.scores
+          }, {
+            headers: { authorization: token }
+          });
+          console.log('Game saved successfully:', response.data);
+          setGameSaved(true);
+        } catch (error) {
+          console.error('Failed to save game:', error);
+        }
+      }
+    };
+
+    // Add a small delay to ensure all round data has been processed
+    const timeoutId = setTimeout(saveGame, 100);
+    return () => clearTimeout(timeoutId);
+  }, [auth.id, gameSaved, game.scores.length, game.distances.length, totalScore]);
 
   const getPerformanceMessage = (score) => {
     if (score >= 20000) return { message: "Outstanding! Geographic genius!", emoji: "🌟" };

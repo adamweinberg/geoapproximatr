@@ -49,14 +49,6 @@ const RoundSlideshow = ({ rounds }) => {
     if (map && rounds.length > 0 && rounds[currentRound]) {
       const round = rounds[currentRound];
       
-      // Debug logging
-      console.log(`Round ${currentRound + 1} data:`, {
-        location: round.location,
-        guess: round.guess,
-        distance: round.distance,
-        score: round.score
-      });
-      
       // Clear existing markers and polyline
       markers.forEach(marker => marker.setMap(null));
       if (polyline) {

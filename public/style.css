@@ -304,6 +304,12 @@ input:focus, textarea:focus, select:focus {
   flex-direction: column;
 }
 
+/* Game container with navbar present */
+.with-navbar #approximatr-container {
+  height: calc(100vh - 60px); /* Subtract navbar height */
+  margin-top: 60px; /* Push down by navbar height */
+}
+
 #game-header {
   background: rgba(15, 15, 35, 0.95);
   backdrop-filter: blur(20px);
@@ -910,6 +916,48 @@ nav a:hover {
   color: var(--text-primary);
 }
 
+/* Game page navbar - less obtrusive */
+nav.game-navbar {
+  background: rgba(15, 15, 35, 0.8);
+  backdrop-filter: blur(10px);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 500; /* Lower z-index than regular navbar */
+  height: 60px; /* Fixed height for consistent layout */
+  display: flex;
+  align-items: center;
+}
+
+nav.game-navbar .nav-content {
+  max-width: none;
+  width: 100%;
+  padding: 0 var(--space-4);
+  margin: 0;
+}
+
+nav.game-navbar .logo {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+nav.game-navbar .nav-links {
+  gap: var(--space-3);
+}
+
+nav.game-navbar .nav-links a {
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+}
+
+nav.game-navbar .nav-links a:hover {
+  opacity: 1;
+}
+
+nav.game-navbar .btn {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+}
+
 /* Form Styles */
 .auth-container {
   min-height: 100vh;
@@ -1223,6 +1271,250 @@ nav a:hover {
 
   .stat-divider {
     display: none;
+  }
+}
+
+/* User Dashboard Styles */
+.dashboard-container {
+  min-height: 100vh;
+  padding: calc(80px + var(--space-8)) var(--space-8) var(--space-8);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.dashboard-header h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dashboard-header p {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+.section-card {
+  padding: var(--space-8);
+}
+
+.section-card h2 {
+  margin-bottom: var(--space-6);
+  color: var(--text-primary);
+  font-size: var(--font-size-2xl);
+}
+
+.games-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.game-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-fast);
+}
+
+.game-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+.game-rank {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-gradient);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-primary);
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+}
+
+.game-date {
+  width: 100px;
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.game-info {
+  flex: 1;
+}
+
+.game-score {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.game-meta {
+  display: flex;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.view-btn {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+}
+
+.no-games {
+  text-align: center;
+  padding: var(--space-8);
+  color: var(--text-muted);
+}
+
+.no-games p {
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-lg);
+}
+
+.error-container {
+  text-align: center;
+  padding: var(--space-8);
+  color: var(--text-muted);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.modal-content {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-glass);
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.close-modal-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.close-modal-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+}
+
+.modal-body {
+  overflow-y: auto;
+  max-height: calc(90vh - 80px);
+  padding: var(--space-4);
+}
+
+.modal-body #game-summary {
+  margin: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.game-date {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-2);
+}
+
+/* Dashboard responsive styles */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: calc(80px + var(--space-4)) var(--space-4) var(--space-4);
+  }
+
+  .dashboard-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .game-item {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-3);
+  }
+
+  .game-rank {
+    align-self: center;
+  }
+
+  .game-date {
+    width: auto;
+  }
+
+  .modal-content {
+    max-width: 95vw;
+    margin: var(--space-2);
+  }
+
+  .modal-header {
+    padding: var(--space-4);
+  }
+
+  .modal-body {
+    padding: var(--space-3);
   }
 }
 
