@@ -19,8 +19,8 @@ export const resetGuess = () => {
 }
 
 const initialState = {
-  latitude: '',
-  longitude: '',
+  latitude: null,
+  longitude: null,
 }
 
 //REDUCER

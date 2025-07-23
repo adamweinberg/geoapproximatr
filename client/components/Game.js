@@ -6,7 +6,6 @@ import GameSummary from "./GameSummary";
 import { resetGame } from "../store/game";
 import { resetGuess } from "../store/guess";
 import { resetLocation } from "../store/location";
-import { Button } from "@material-ui/core";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -29,36 +28,52 @@ const Game = () => {
       return (
         <React.Fragment>
           <GameSummary handleNewGame={handleNewGame} />
-          <Button id="new-game-button" onClick={handleNewGame}>
+          <button 
+            id="new-game-button" 
+            className="action-button btn btn-primary"
+            onClick={handleNewGame}
+          >
             New Game
-          </Button>
+          </button>
         </React.Fragment>
       );
     } else if (step === 10) {
       return (
         <React.Fragment>
           <RoundResult activeStep={activeStep} />
-          <Button onClick={handleSubmit} id="next-round-button">
+          <button 
+            onClick={handleSubmit} 
+            id="next-round-button"
+            className="action-button btn btn-primary"
+          >
             Game Summary
-          </Button>
+          </button>
         </React.Fragment>
       );
     } else if (step % 2 === 1) {
       return (
         <React.Fragment>
           <Approximatr activeStep={activeStep} />
-          <Button id="submit-guess-button" onClick={handleSubmit}>
+          <button 
+            id="submit-guess-button" 
+            className="action-button btn btn-accent"
+            onClick={handleSubmit}
+          >
             Submit Guess
-          </Button>
+          </button>
         </React.Fragment>
       );
     } else {
       return (
         <React.Fragment>
           <RoundResult />
-          <Button id="next-round-button" onClick={handleSubmit}>
+          <button 
+            id="next-round-button" 
+            className="action-button btn btn-primary"
+            onClick={handleSubmit}
+          >
             Next Round
-          </Button>
+          </button>
         </React.Fragment>
       );
     }
