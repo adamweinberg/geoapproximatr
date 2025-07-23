@@ -49,14 +49,6 @@ const RoundSlideshow = ({ rounds }) => {
     if (map && rounds.length > 0 && rounds[currentRound]) {
       const round = rounds[currentRound];
       
-      // Debug logging
-      console.log(`Round ${currentRound + 1} data:`, {
-        location: round.location,
-        guess: round.guess,
-        distance: round.distance,
-        score: round.score
-      });
-      
       // Clear existing markers and polyline
       markers.forEach(marker => marker.setMap(null));
       if (polyline) {
@@ -113,14 +105,21 @@ const RoundSlideshow = ({ rounds }) => {
 
       setMarkers(newMarkers);
 
-      // Fit bounds to show both markers
+      // Fit bounds to show both markers with proper padding
       if (newMarkers.length === 2) {
         const bounds = new window.google.maps.LatLngBounds();
         newMarkers.forEach(marker => bounds.extend(marker.getPosition()));
-        map.fitBounds(bounds);
         
-        // Add some padding
-        const listener = window.google.maps.event.addListenerOnce(map, "idle", () => {
+        // Fit bounds with padding
+        map.fitBounds(bounds, {
+          top: 50,
+          right: 50,
+          bottom: 50,
+          left: 50
+        });
+        
+        // Set maximum zoom level to prevent zooming in too close
+        const listener = window.google.maps.event.addListenerOnce(map, "bounds_changed", () => {
           if (map.getZoom() > 15) {
             map.setZoom(15);
           }

@@ -3,16 +3,18 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <nav className="glass">
+const Navbar = ({handleClick, isLoggedIn, isGamePage}) => (
+  <nav className={`glass ${isGamePage ? 'game-navbar' : ''}`}>
     <div className="nav-content">
-      <Link to="/home" className="logo">
-        GeoApproximatr
+      <Link to="/" className="logo">
+        {isGamePage ? 'GA' : 'GeoApproximatr'}
       </Link>
       <div className="nav-links">
+        <Link to="/leaderboard">Leaderboard</Link>
         {isLoggedIn ? (
           <>
-            <Link to="/home">Home</Link>
+            <Link to="/">Home</Link>
+            <Link to="/dashboard">Dashboard</Link>
             <button 
               onClick={handleClick}
               className="btn btn-secondary"
