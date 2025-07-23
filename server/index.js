@@ -10,6 +10,7 @@ const init = async () => {
   try {
     console.log('Starting server initialization...');
     console.log('DATABASE_URL configured:', !!process.env.DATABASE_URL);
+    console.log('NETLIFY_DATABASE_URL configured:', !!process.env.NETLIFY_DATABASE_URL);
     console.log('JWT configured:', !!process.env.JWT);
     
     if(process.env.SEED === 'true'){
