@@ -1,0 +1,23 @@
+[build]
+  publish = "public"
+  command = "npm run build"
+  
+[functions]
+  node_bundler = "esbuild"
+
+# Redirect all /api and /auth requests to Netlify Functions
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/auth/*"
+  to = "/.netlify/functions/auth/:splat"
+  status = 200
+
+# SPA fallback for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
