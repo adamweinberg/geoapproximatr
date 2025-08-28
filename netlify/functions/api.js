@@ -5,8 +5,8 @@ const path = require('path');
 // Load environment variables  
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
-// Initialize database connection
-const { db } = require('../../server/db');
+// Initialize serverless database and models
+require('../../server/db/serverless-index');
 
 const apiRouter = require('../../server/api');
 
