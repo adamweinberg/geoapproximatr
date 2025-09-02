@@ -215,14 +215,60 @@ input:focus, textarea:focus, select:focus {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: var(--space-8);
+  padding: var(--space-16) var(--space-8);
+  gap: var(--space-8);
+}
+
+/* Tablet spacing adjustments */
+@media (max-width: 768px) {
+  #home-container {
+    padding: var(--space-12) var(--space-6);
+    gap: var(--space-6);
+  }
+  
+  #home-container img {
+    max-width: 280px;
+    margin-bottom: var(--space-12);
+  }
+  
+  #welcome {
+    margin-bottom: var(--space-8);
+  }
+  
+  #home-buttons {
+    gap: var(--space-4);
+    margin-bottom: var(--space-12);
+  }
+}
+
+/* Mobile spacing adjustments */
+@media (max-width: 480px) {
+  #home-container {
+    padding: var(--space-8) var(--space-4);
+    gap: var(--space-4);
+  }
+  
+  #home-container img {
+    max-width: 220px;
+    margin-bottom: var(--space-8);
+  }
+  
+  #welcome {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-6);
+  }
+  
+  #home-buttons {
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
 }
 
 #home-container img {
-  max-width: 200px;
+  max-width: 350px;
   height: auto;
-  margin-bottom: var(--space-8);
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  margin-bottom: var(--space-16);
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
   animation: float 6s ease-in-out infinite;
 }
 
@@ -234,7 +280,7 @@ input:focus, textarea:focus, select:focus {
 #welcome {
   font-size: var(--font-size-4xl);
   font-weight: 800;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-12);
   background: var(--primary-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -255,10 +301,10 @@ input:focus, textarea:focus, select:focus {
 
 #home-buttons {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-6);
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-16);
 }
 
 /* Features Grid */
@@ -887,8 +933,7 @@ nav .nav-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 nav .logo {
@@ -914,6 +959,26 @@ nav a {
 
 nav a:hover {
   color: var(--text-primary);
+}
+
+nav a.active {
+  color: var(--text-primary);
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary-gradient);
+  border-radius: 1px;
 }
 
 /* Game page navbar - less obtrusive */
@@ -953,9 +1018,137 @@ nav.game-navbar .nav-links a:hover {
   opacity: 1;
 }
 
+nav.game-navbar .nav-links a.active {
+  opacity: 1;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+nav.game-navbar .nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--primary-gradient);
+  border-radius: 1px;
+}
+
 nav.game-navbar .btn {
   padding: var(--space-1) var(--space-3);
   font-size: var(--font-size-xs);
+}
+
+/* New Game Button */
+.new-game-btn {
+  padding: var(--space-2) var(--space-4) !important;
+  font-size: var(--font-size-sm) !important;
+  font-weight: 600;
+}
+
+/* Icon utilities */
+.inline-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: var(--space-2);
+}
+
+.performance-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: var(--space-2);
+}
+
+/* Login Button */
+.login-btn {
+  padding: var(--space-2) var(--space-4) !important;
+  font-size: var(--font-size-sm) !important;
+  font-weight: 600;
+}
+
+/* User Dropdown */
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.user-avatar-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar-btn:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-glow);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: var(--space-2);
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2);
+  min-width: 150px;
+  box-shadow: var(--shadow-xl);
+  z-index: 1000;
+}
+
+.dropdown-menu a, .dropdown-logout {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+}
+
+.dropdown-menu a:hover, .dropdown-logout:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.dropdown-menu a.active {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Game navbar adjustments */
+nav.game-navbar .user-avatar-btn {
+  width: 32px;
+  height: 32px;
+  font-size: var(--font-size-sm);
+}
+
+nav.game-navbar .new-game-btn {
+  padding: var(--space-1) var(--space-3) !important;
+  font-size: var(--font-size-xs) !important;
 }
 
 /* Form Styles */

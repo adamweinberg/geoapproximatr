@@ -19,12 +19,12 @@ const init = async () => {
     else {
       console.log('Syncing database...');
       await db.sync({ alter: true });
-      console.log('✅ Database sync completed');
+      console.log('Database sync completed');
     }
     // start listening (and create a 'server' object representing our server)
-    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`))
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
   } catch (ex) {
-    console.error('❌ Server initialization failed:', ex);
+    console.error('Server initialization failed:', ex);
     process.exit(1);
   }
 }

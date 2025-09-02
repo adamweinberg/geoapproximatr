@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Star, Trophy, PartyPopper, Sparkles, Rocket } from 'lucide-react';
 import axios from "axios";
 import BarGraph from "./BarGraph";
 import GameTable from "./GameTable";
@@ -59,11 +60,11 @@ const GameSummary = () => {
   }, [auth.id, gameSaved, game.scores.length, game.distances.length, totalScore]);
 
   const getPerformanceMessage = (score) => {
-    if (score >= 20000) return { message: "Outstanding! Geographic genius!", emoji: "🌟" };
-    if (score >= 15000) return { message: "Excellent! You know your world!", emoji: "⭐" };
-    if (score >= 10000) return { message: "Great job! Keep exploring!", emoji: "🎉" };
-    if (score >= 5000) return { message: "Good effort! Practice makes perfect!", emoji: "💪" };
-    return { message: "Keep adventuring! Every journey teaches us!", emoji: "🚀" };
+    if (score >= 20000) return { message: "Outstanding! Geographic genius!", icon: Sparkles };
+    if (score >= 15000) return { message: "Excellent! You know your world!", icon: Star };
+    if (score >= 10000) return { message: "Great job! Keep exploring!", icon: PartyPopper };
+    if (score >= 5000) return { message: "Good effort! Practice makes perfect!", icon: Trophy };
+    return { message: "Keep adventuring! Every journey teaches us!", icon: Rocket };
   };
 
   const performance = getPerformanceMessage(totalScore);
@@ -73,7 +74,7 @@ const GameSummary = () => {
       <div className="summary-header">
         <h2>Game Complete!</h2>
         <div className="performance-message">
-          <span className="performance-emoji">{performance.emoji}</span>
+          <span className="performance-icon"><performance.icon size={24} /></span>
           <p>{performance.message}</p>
         </div>
       </div>

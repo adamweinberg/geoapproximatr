@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Trophy, Calendar } from 'lucide-react';
 import axios from 'axios';
 import GameSummaryModal from './GameSummaryModal';
 
@@ -77,14 +78,14 @@ const UserDashboard = () => {
         <h1>Welcome back, {username}!</h1>
         <p>Track your progress and review your best games</p>
         <Link to="/game" className="btn btn-accent">
-          Play New Game
+          Start New Game
         </Link>
       </div>
 
       <div className="dashboard-content">
         <div className="games-section">
           <div className="section-card glass-card">
-            <h2>🏆 Top 5 High Scores</h2>
+            <h2><Trophy size={24} className="inline-icon" /> Your High Scores</h2>
             {highScores.length > 0 ? (
               <div className="games-list">
                 {highScores.map((game, index) => (
@@ -110,9 +111,6 @@ const UserDashboard = () => {
             ) : (
               <div className="no-games">
                 <p>No games played yet!</p>
-                <Link to="/game" className="btn btn-accent">
-                  Play Your First Game
-                </Link>
               </div>
             )}
           </div>
@@ -120,7 +118,7 @@ const UserDashboard = () => {
 
         <div className="games-section">
           <div className="section-card glass-card">
-            <h2>📅 Recent Games</h2>
+            <h2><Calendar size={24} className="inline-icon" /> Recent Games</h2>
             {recentGames.length > 0 ? (
               <div className="games-list">
                 {recentGames.map((game) => (
@@ -148,9 +146,6 @@ const UserDashboard = () => {
             ) : (
               <div className="no-games">
                 <p>No recent games!</p>
-                <Link to="/game" className="btn btn-accent">
-                  Start Playing
-                </Link>
               </div>
             )}
           </div>

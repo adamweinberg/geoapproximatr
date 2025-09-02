@@ -39,6 +39,7 @@
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
     "load-google-maps-api": "^2.0.2",
+    "lucide-react": "^0.542.0",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
     "pg-native": "^3.5.2",

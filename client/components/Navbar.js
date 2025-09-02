@@ -1,47 +1,93 @@
-import React from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn, isGamePage}) => (
-  <nav className={`glass ${isGamePage ? 'game-navbar' : ''}`}>
-    <div className="nav-content">
-      <Link to="/" className="logo">
-        {isGamePage ? 'GA' : 'GeoApproximatr'}
-      </Link>
-      <div className="nav-links">
-        <Link to="/leaderboard">Leaderboard</Link>
-        {isLoggedIn ? (
-          <>
-            <Link to="/">Home</Link>
-            <Link to="/dashboard">Dashboard</Link>
-            <button 
-              onClick={handleClick}
-              className="btn btn-secondary"
-              style={{padding: 'var(--space-2) var(--space-4)', fontSize: 'var(--font-size-sm)'}}
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup" className="btn btn-primary" style={{padding: 'var(--space-2) var(--space-4)', fontSize: 'var(--font-size-sm)'}}>
-              Sign Up
-            </Link>
-          </>
-        )}
+const Navbar = ({handleClick, isLoggedIn, isGamePage, user}) => {
+  const location = useLocation()
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const dropdownRef = useRef(null)
+  
+  const getUserInitials = (username) => {
+    if (!username) return 'U'
+    return username.charAt(0).toUpperCase()
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+  
+  return (
+    <nav className={`glass ${isGamePage ? 'game-navbar' : ''}`}>
+      <div className="nav-content">
+        <Link to="/" className="logo">
+          {isGamePage ? 'GA' : 'GeoApproximatr'}
+        </Link>
+        <div className="nav-links">
+          <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link>
+          <Link to="/leaderboard" className={location.pathname === '/leaderboard' ? 'active' : ''}>Leaderboard</Link>
+          <Link to="/game" className="btn btn-primary new-game-btn">New Game</Link>
+          {isLoggedIn ? (
+            <div className="user-dropdown" ref={dropdownRef}>
+              <button 
+                className="user-avatar-btn"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                {getUserInitials(user.username)}
+              </button>
+              {dropdownOpen && (
+                <div className="dropdown-menu">
+                  <Link 
+                    to="/dashboard" 
+                    className={location.pathname === '/dashboard' ? 'active' : ''}
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link 
+                    to="/account" 
+                    className={location.pathname === '/account' ? 'active' : ''}
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    Account
+                  </Link>
+                  <button 
+                    onClick={() => {
+                      handleClick()
+                      setDropdownOpen(false)
+                    }}
+                    className="dropdown-logout"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link to="/login" className="btn btn-secondary login-btn">Login</Link>
+          )}
       </div>
     </div>
   </nav>
-)
+  )
+}
 
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
+    user: state.auth
   }
 }
 
