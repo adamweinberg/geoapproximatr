@@ -1,16 +1,18 @@
 // Serverless-compatible database setup for Netlify Functions
-const { db } = require('./serverless-db');
+// server/db/serverless-index.js
+const { db, sql } = require('./serverless-db');
 
-// Import models with serverless database
-const User = require('./models/User');
-const Game = require('./models/Game');
+// Import serverless-compatible models
+const User = require('./models/User.serverless');
+const Game = require('./models/Game.serverless');
 
-// Set up associations
-User.hasMany(Game);
-Game.belongsTo(User);
+// Set up associations (for compatibility)
+User.hasMany = () => {};
+Game.belongsTo = () => {};
 
 module.exports = {
   db,
+  sql,
   models: {
     User,
     Game,
