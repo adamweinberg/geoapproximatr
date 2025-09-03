@@ -502,7 +502,7 @@ input:focus, textarea:focus, select:focus {
 /* Results Styles */
 #round-results {
   position: fixed;
-  top: calc(var(--navbar-height) + var(--space-4));
+  bottom: calc(var(--space-6) + 80px); /* Just above the next round button */
   left: 50%;
   transform: translateX(-50%);
   z-index: 999; /* Just below navbar */
@@ -516,7 +516,18 @@ input:focus, textarea:focus, select:focus {
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  animation: slideInDown 0.4s ease-out;
+  animation: slideInUp 0.4s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 @keyframes slideInDown {
@@ -1700,7 +1711,7 @@ nav.game-navbar .new-game-btn {
   
   /* Compact results for mobile */
   #round-results {
-    top: calc(var(--navbar-height) + var(--space-2));
+    bottom: calc(var(--space-4) + 60px);
     max-width: calc(100% - 2 * var(--space-4));
     min-width: auto;
     padding: var(--space-3);
