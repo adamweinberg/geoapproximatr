@@ -17,7 +17,7 @@ if(process.env.LOGGING === 'true'){
   delete config.logging
 }
 
-// Check for both DATABASE_URL and NETLIFY_DATABASE_URL (Neon extension creates the latter)
+// Check for DATABASE_URL first (local dev and regular deployments), then NETLIFY_DATABASE_URL as fallback
 const databaseUrl = process.env.DATABASE_URL || process.env.NETLIFY_DATABASE_URL || `postgres://localhost:5432/${databaseName}`;
 
 //https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
