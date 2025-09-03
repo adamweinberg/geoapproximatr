@@ -18,7 +18,7 @@ const init = async () => {
     }
     else {
       console.log('Syncing database...');
-      await db.sync({ alter: true });
+      await db.sync();
       console.log('Database sync completed');
     }
     // start listening (and create a 'server' object representing our server)
