@@ -230,17 +230,17 @@ input:focus, textarea:focus, select:focus {
   }
   
   #home-container img {
-    max-width: 280px;
-    margin-bottom: var(--space-12);
+    max-width: 500px;
+    margin-bottom: var(--space-4);
   }
   
   #welcome {
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-4);
   }
   
   #home-buttons {
     gap: var(--space-4);
-    margin-bottom: var(--space-12);
+    margin-bottom: var(--space-4);
   }
 }
 
@@ -252,8 +252,8 @@ input:focus, textarea:focus, select:focus {
   }
   
   #home-container img {
-    max-width: 220px;
-    margin-bottom: var(--space-8);
+    max-width: 350px;
+    margin-bottom: var(--space-4);
   }
   
   #welcome {
@@ -263,14 +263,14 @@ input:focus, textarea:focus, select:focus {
   
   #home-buttons {
     gap: var(--space-3);
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-4);
   }
 }
 
 #home-container img {
-  max-width: 350px;
+  max-width: 480px;
   height: auto;
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-4);
   filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
   animation: float 6s ease-in-out infinite;
 }
@@ -283,7 +283,7 @@ input:focus, textarea:focus, select:focus {
 #welcome {
   font-size: var(--font-size-4xl);
   font-weight: 800;
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-4);
   background: var(--primary-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -307,7 +307,7 @@ input:focus, textarea:focus, select:focus {
   gap: var(--space-6);
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-4);
 }
 
 /* Features Grid */
