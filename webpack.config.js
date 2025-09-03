@@ -33,7 +33,11 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify(dotenv.parsed),
+      'process.env': JSON.stringify({
+        ...dotenv.parsed,
+        // Include React environment variables from system environment
+        REACT_APP_API_KEY: process.env.REACT_APP_API_KEY,
+      }),
       'process.env.NODE_ENV': JSON.stringify(isDevelopment ? 'development' : 'production'),
     }),
   ].filter(Boolean),
