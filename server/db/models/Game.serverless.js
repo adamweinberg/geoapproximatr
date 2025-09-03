@@ -105,11 +105,10 @@ class Game {
     
     try {
       console.log('About to execute query...');
-      // Use sql.unsafe() but properly execute it
-      console.log('Using sql.unsafe() to execute raw query...');
-      const unsafeQuery = sql.unsafe(query);
-      console.log('UnsafeQuery object:', unsafeQuery);
-      const results = await unsafeQuery;
+      // Try building a proper template literal call
+      console.log('Using Function constructor to build query...');
+      const queryFunc = new Function('sql', `return sql\`${query}\`;`);
+      const results = await queryFunc(sql);
       console.log('Raw SQL results:', results);
       console.log('Results type:', typeof results);
       console.log('Results is array:', Array.isArray(results));
