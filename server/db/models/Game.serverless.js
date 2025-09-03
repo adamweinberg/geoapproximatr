@@ -1,4 +1,3 @@
-// server/db/models/Game.serverless.js
 const { sql } = require('../serverless-db');
 
 class Game {
@@ -12,14 +11,25 @@ class Game {
     
     if (options.where) {
       const conditions = Object.entries(options.where)
-        .map(([key, value]) => `${key} = '${value}'`)
+        .map(([key, value]) => {
+          if (typeof value === 'object' && value[Object.keys(value)[0]]) {
+            // Handle Sequelize operators like { [Op.gte]: date }
+            const op = Object.keys(value)[0];
+            const val = value[op];
+            if (op === 'gte') return `"${key}" >= '${val}'`;
+            if (op === 'lte') return `"${key}" <= '${val}'`;
+            if (op === 'gt') return `"${key}" > '${val}'`;
+            if (op === 'lt') return `"${key}" < '${val}'`;
+          }
+          return `"${key}" = '${value}'`;
+        })
         .join(' AND ');
       query += ` WHERE ${conditions}`;
     }
     
     if (options.order) {
       const orderClause = options.order
-        .map(([field, direction]) => `${field} ${direction}`)
+        .map(([field, direction]) => `"${field}" ${direction}`)
         .join(', ');
       query += ` ORDER BY ${orderClause}`;
     }
@@ -48,12 +58,12 @@ class Game {
             // Handle Sequelize operators like { [Op.gte]: date }
             const op = Object.keys(value)[0];
             const val = value[op];
-            if (op === 'gte') return `${key} >= '${val}'`;
-            if (op === 'lte') return `${key} <= '${val}'`;
-            if (op === 'gt') return `${key} > '${val}'`;
-            if (op === 'lt') return `${key} < '${val}'`;
+            if (op === 'gte') return `g."${key}" >= '${val}'`;
+            if (op === 'lte') return `g."${key}" <= '${val}'`;
+            if (op === 'gt') return `g."${key}" > '${val}'`;
+            if (op === 'lt') return `g."${key}" < '${val}'`;
           }
-          return `${key} = '${value}'`;
+          return `g."${key}" = '${value}'`;
         })
         .join(' AND ');
       query += ` WHERE ${conditions}`;
@@ -61,7 +71,7 @@ class Game {
     
     if (options.order) {
       const orderClause = options.order
-        .map(([field, direction]) => `${field} ${direction}`)
+        .map(([field, direction]) => `g."${field}" ${direction}`)
         .join(', ');
       query += ` ORDER BY ${orderClause}`;
     }
@@ -74,10 +84,21 @@ class Game {
   }
   
   static async create(data) {
-    const fields = Object.keys(data).join(', ');
-    const values = Object.values(data).map(v => `'${v}'`).join(', ');
-    const result = await sql.unsafe(`INSERT INTO games (${fields}) VALUES (${values}) RETURNING *`);
-    return result[0];
+    try {
+      console.log('Creating game with data:', data);
+      
+      const result = await sql`
+        INSERT INTO games ("userId", "totalScore", "averageScore", "bestRound", "worstRound", rounds, distances, scores, "completedAt")
+        VALUES (${data.userId}, ${data.totalScore}, ${data.averageScore}, ${data.bestRound}, ${data.worstRound}, ${JSON.stringify(data.rounds)}, ${JSON.stringify(data.distances)}, ${JSON.stringify(data.scores)}, ${data.completedAt || new Date().toISOString()})
+        RETURNING *
+      `;
+      
+      console.log('Game created successfully:', result[0]);
+      return result[0];
+    } catch (error) {
+      console.error('Error creating game:', error);
+      throw error;
+    }
   }
   
   static async count(options = {}) {
@@ -85,7 +106,7 @@ class Game {
     
     if (options.where) {
       const conditions = Object.entries(options.where)
-        .map(([key, value]) => `${key} = '${value}'`)
+        .map(([key, value]) => `"${key}" = '${value}'`)
         .join(' AND ');
       query += ` WHERE ${conditions}`;
     }
@@ -99,7 +120,7 @@ class Game {
     
     if (options.where) {
       const conditions = Object.entries(options.where)
-        .map(([key, value]) => `${key} = '${value}'`)
+        .map(([key, value]) => `"${key}" = '${value}'`)
         .join(' AND ');
       query += ` WHERE ${conditions}`;
     }

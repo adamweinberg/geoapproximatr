@@ -1,4 +1,3 @@
-// server/db/models/User.serverless.js
 const { sql } = require('../serverless-db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -11,7 +10,7 @@ class User {
   
   static async findOne(where) {
     const conditions = Object.entries(where)
-      .map(([key, value]) => `${key} = '${value}'`)
+      .map(([key, value]) => `"${key}" = '${value}'`)
       .join(' AND ');
     const result = await sql.unsafe(`SELECT * FROM users WHERE ${conditions} LIMIT 1`);
     return result[0] || null;
@@ -21,20 +20,20 @@ class User {
     let query = 'SELECT * FROM users';
     
     if (options.attributes) {
-      const attrs = options.attributes.join(', ');
+      const attrs = options.attributes.map(attr => `"${attr}"`).join(', ');
       query = `SELECT ${attrs} FROM users`;
     }
     
     if (options.where) {
       const conditions = Object.entries(options.where)
-        .map(([key, value]) => `${key} = '${value}'`)
+        .map(([key, value]) => `"${key}" = '${value}'`)
         .join(' AND ');
       query += ` WHERE ${conditions}`;
     }
     
     if (options.order) {
       const orderClause = options.order
-        .map(([field, direction]) => `${field} ${direction}`)
+        .map(([field, direction]) => `"${field}" ${direction}`)
         .join(', ');
       query += ` ORDER BY ${orderClause}`;
     }
@@ -54,16 +53,12 @@ class User {
       const hashedPassword = await bcrypt.hash(data.password, 5);
       console.log('Password hashed');
       
-      const fields = Object.keys(data).filter(key => key !== 'password').join(', ') + ', password';
-      const values = Object.values(data)
-        .filter((_, index) => Object.keys(data)[index] !== 'password')
-        .map(v => `'${v}'`)
-        .join(', ') + `, '${hashedPassword}'`;
+      const result = await sql`
+        INSERT INTO users (username, "firstName", "lastName", "countryOfOrigin", password)
+        VALUES (${data.username}, ${data.firstName}, ${data.lastName}, ${data.countryOfOrigin}, ${hashedPassword})
+        RETURNING *
+      `;
       
-      const query = `INSERT INTO users (${fields}) VALUES (${values}) RETURNING *`;
-      console.log('Executing query:', query);
-      
-      const result = await sql.unsafe(query);
       console.log('User created successfully:', result[0]);
       return result[0];
     } catch (error) {
@@ -77,7 +72,7 @@ class User {
     
     if (options.where) {
       const conditions = Object.entries(options.where)
-        .map(([key, value]) => `${key} = '${value}'`)
+        .map(([key, value]) => `"${key}" = '${value}'`)
         .join(' AND ');
       query += ` WHERE ${conditions}`;
     }
@@ -88,7 +83,7 @@ class User {
   
   async update(data) {
     const updates = Object.entries(data)
-      .map(([key, value]) => `${key} = '${value}'`)
+      .map(([key, value]) => `"${key}" = '${value}'`)
       .join(', ');
     const result = await sql.unsafe(`UPDATE users SET ${updates} WHERE id = ${this.id} RETURNING *`);
     return result[0];
