@@ -22,10 +22,34 @@ export const resetLocation = () => {
 //THUNK
 export const getLocation = () => {
   return async dispatch => {
-    const location = await randomStreetView.getRandomLocation()
-    const locationObj = {latitude: location[0], longitude: location[1]}
-    //const locationObj = {latitude: 54.7141104563471, longitude: 45.010128021240234 } //for testing
-    dispatch(gotLocation(locationObj))
+    try {
+      const location = await randomStreetView.getRandomLocation()
+      
+      // Validate that we got a valid location
+      if (!location || location === false || !Array.isArray(location) || location.length !== 2) {
+        throw new Error('Invalid location returned from randomStreetView')
+      }
+      
+      const [lat, lng] = location
+      
+      // Validate coordinates are valid numbers
+      if (typeof lat !== 'number' || typeof lng !== 'number' || isNaN(lat) || isNaN(lng)) {
+        throw new Error('Invalid coordinates received')
+      }
+      
+      // Validate coordinates are in valid ranges
+      if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+        throw new Error('Coordinates out of valid range')
+      }
+      
+      const locationObj = {latitude: lat, longitude: lng}
+      dispatch(gotLocation(locationObj))
+      
+    } catch (error) {
+      console.error('Error getting location:', error)
+      // You could dispatch an error action here if you have one
+      throw error // Re-throw so the component can handle it
+    }
   }
 }
 

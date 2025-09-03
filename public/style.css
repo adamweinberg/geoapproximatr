@@ -487,6 +487,39 @@ input:focus, textarea:focus, select:focus {
   box-shadow: var(--shadow-xl);
 }
 
+/* Disabled Button Styles */
+.btn-disabled {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  cursor: not-allowed !important;
+}
+.btn-disabled:hover {
+  transform: none !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* Submit Section Styles */
+.submit-section {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+.guess-instruction {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--font-size-sm);
+  margin: 0;
+  text-align: center;
+  background: rgba(15, 15, 35, 0.9);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 #next-round-button, #new-game-button {
   bottom: var(--space-6);
   left: 50%;

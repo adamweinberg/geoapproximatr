@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Approximatr from "./Approximatr";
 import RoundResult from "./RoundResult";
@@ -11,6 +11,7 @@ import { resetLocation } from "../store/location";
 const Game = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { guess } = useSelector((state) => state);
 
   const [activeStep, setActiveStep] = useState(1);
 
@@ -44,8 +45,17 @@ const Game = () => {
     return unblock;
   }, [history, activeStep]);
 
+  // Check if user has made a valid guess
+  const hasValidGuess = () => {
+    return guess.latitude !== null && guess.longitude !== null &&
+           typeof guess.latitude === 'number' && typeof guess.longitude === 'number' &&
+           !isNaN(guess.latitude) && !isNaN(guess.longitude);
+  };
+
   const handleSubmit = () => {
-    setActiveStep(activeStep + 1);
+    if (hasValidGuess()) {
+      setActiveStep(activeStep + 1);
+    }
   };
 
   const handleNewGame = () => {
@@ -83,13 +93,15 @@ const Game = () => {
         </React.Fragment>
       );
     } else if (step % 2 === 1) {
+      const isValidGuess = hasValidGuess();
       return (
         <React.Fragment>
           <Approximatr activeStep={activeStep} />
           <button 
             id="submit-guess-button" 
-            className="action-button btn btn-accent"
+            className={`action-button btn ${isValidGuess ? 'btn-accent' : 'btn-disabled'}`}
             onClick={handleSubmit}
+            disabled={!isValidGuess}
           >
             Submit Guess
           </button>
