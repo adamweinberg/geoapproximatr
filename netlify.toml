@@ -1,13 +1,10 @@
 [build]
-  publish = "public"
   command = "npm run build"
+  functions = "netlify/functions"
+  publish = "public"
 
 [build.environment]
   NODE_VERSION = "20.18.1"
-  
-[functions]
-  node_bundler = "esbuild"
-  external_node_modules = ["pg-native"]
 
 # Redirect all /api and /auth requests to Netlify Functions
 [[redirects]]
