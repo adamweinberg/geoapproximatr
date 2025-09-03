@@ -1,9 +1,5 @@
 const serverless = require('serverless-http');
 const express = require('express');
-const path = require('path');
-
-// Load environment variables
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 // Initialize serverless database and models
 require('../../server/db/serverless-index');
