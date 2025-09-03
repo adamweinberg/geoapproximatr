@@ -47,7 +47,8 @@ class Game {
   static async findAll(options = {}) {
     console.log('Game.findAll called with options:', JSON.stringify(options, null, 2));
     
-    let query = 'SELECT * FROM games';
+    let query;
+    let tableAlias;
     
     if (options.include) {
       query = `
@@ -55,6 +56,10 @@ class Game {
         FROM games g
         JOIN users u ON g."userId" = u.id
       `;
+      tableAlias = 'g';
+    } else {
+      query = 'SELECT * FROM games';
+      tableAlias = 'games';
     }
     
     if (options.where) {
@@ -67,15 +72,15 @@ class Game {
               const op = operators[0];
               const val = value[op];
               console.log(`Processing operator: ${op} with value:`, val);
-              if (op === 'gte') return `g."${key}" >= '${val}'`;
-              if (op === 'lte') return `g."${key}" <= '${val}'`;
-              if (op === 'gt') return `g."${key}" > '${val}'`;
-              if (op === 'lt') return `g."${key}" < '${val}'`;
+              if (op === 'gte') return `${tableAlias}."${key}" >= '${val}'`;
+              if (op === 'lte') return `${tableAlias}."${key}" <= '${val}'`;
+              if (op === 'gt') return `${tableAlias}."${key}" > '${val}'`;
+              if (op === 'lt') return `${tableAlias}."${key}" < '${val}'`;
             }
             console.log(`Unhandled object value for ${key}:`, value);
             return null; // Skip this condition
           }
-          return `g."${key}" = '${value}'`;
+          return `${tableAlias}."${key}" = '${value}'`;
         })
         .filter(condition => condition !== null) // Remove null conditions
         .join(' AND ');
@@ -87,7 +92,7 @@ class Game {
     
     if (options.order) {
       const orderClause = options.order
-        .map(([field, direction]) => `g."${field}" ${direction}`)
+        .map(([field, direction]) => `${tableAlias}."${field}" ${direction}`)
         .join(', ');
       query += ` ORDER BY ${orderClause}`;
     }
@@ -100,7 +105,11 @@ class Game {
     
     try {
       console.log('About to execute query...');
-      const results = await sql.unsafe(query);
+      // Use sql.unsafe() but properly execute it
+      console.log('Using sql.unsafe() to execute raw query...');
+      const unsafeQuery = sql.unsafe(query);
+      console.log('UnsafeQuery object:', unsafeQuery);
+      const results = await unsafeQuery;
       console.log('Raw SQL results:', results);
       console.log('Results type:', typeof results);
       console.log('Results is array:', Array.isArray(results));
