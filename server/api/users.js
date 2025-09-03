@@ -1,6 +1,20 @@
 const router = require('express').Router()
-const { models: { User, Game }} = require('../db')
 const jwt = require('jsonwebtoken')
+
+// Use serverless models if available, fallback to regular models
+let User, Game;
+try {
+  const serverlessModels = require('../db/serverless-index').models;
+  User = serverlessModels.User;
+  Game = serverlessModels.Game;
+  console.log('Users route using serverless models');
+} catch {
+  const regularModels = require('../db').models;
+  User = regularModels.User;
+  Game = regularModels.Game;
+  console.log('Users route using regular models');
+}
+
 module.exports = router
 
 router.get('/', async (req, res, next) => {

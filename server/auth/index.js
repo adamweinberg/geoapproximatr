@@ -1,5 +1,17 @@
 const router = require('express').Router()
-const { models: {User }} = require('../db')
+
+// Use serverless models if available, fallback to regular models
+let User;
+try {
+  const serverlessModels = require('../db/serverless-index').models;
+  User = serverlessModels.User;
+  console.log('Auth route using serverless models');
+} catch {
+  const regularModels = require('../db').models;
+  User = regularModels.User;
+  console.log('Auth route using regular models');
+}
+
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -9,7 +21,6 @@ router.post('/login', async (req, res, next) => {
     next(err)
   }
 })
-
 
 router.post('/signup', async (req, res, next) => {
   try {
