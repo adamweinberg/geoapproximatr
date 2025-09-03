@@ -34,9 +34,4 @@ Then, navigate to http://localhost:8080 in your browser. You should now be playi
 
 ## Contributors
 - [Adam Weinberg](https://github.com/adamweinberg)
-
-## Future Updates
-In the relatively-near future, I'm planning on adding some more features to GeoApproximatr, including:
-- User account creation (much of the backend code needed for this is already in the repository - I just need to integrate it!)
-- Global and user-level high scores
-- Improved display for all screen sizes
+- 
