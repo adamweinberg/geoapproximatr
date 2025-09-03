@@ -3,9 +3,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 class User {
+  constructor(data) {
+    if (data) {
+      Object.assign(this, data);
+    }
+  }
+
   static async findByPk(id) {
     const result = await sql`SELECT * FROM users WHERE id = ${id}`;
-    return result[0] || null;
+    return result[0] ? new User(result[0]) : null;
   }
   
   static async findOne(where) {
@@ -13,7 +19,7 @@ class User {
       .map(([key, value]) => `"${key}" = '${value}'`)
       .join(' AND ');
     const result = await sql.unsafe(`SELECT * FROM users WHERE ${conditions} LIMIT 1`);
-    return result[0] || null;
+    return result[0] ? new User(result[0]) : null;
   }
   
   static async findAll(options = {}) {
@@ -42,7 +48,8 @@ class User {
       query += ` LIMIT ${options.limit}`;
     }
     
-    return await sql.unsafe(query);
+    const results = await sql.unsafe(query);
+    return results.map(row => new User(row));
   }
   
   static async create(data) {
@@ -60,7 +67,7 @@ class User {
       `;
       
       console.log('User created successfully:', result[0]);
-      return result[0];
+      return new User(result[0]);
     } catch (error) {
       console.error('Error creating user:', error);
       throw error;
@@ -86,7 +93,9 @@ class User {
       .map(([key, value]) => `"${key}" = '${value}'`)
       .join(', ');
     const result = await sql.unsafe(`UPDATE users SET ${updates} WHERE id = ${this.id} RETURNING *`);
-    return result[0];
+    const updatedUser = new User(result[0]);
+    Object.assign(this, updatedUser);
+    return this;
   }
   
   async destroy() {

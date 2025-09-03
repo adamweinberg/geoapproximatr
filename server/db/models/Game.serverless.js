@@ -1,9 +1,15 @@
 const { sql } = require('../serverless-db');
 
 class Game {
+  constructor(data) {
+    if (data) {
+      Object.assign(this, data);
+    }
+  }
+
   static async findByPk(id) {
     const result = await sql`SELECT * FROM games WHERE id = ${id}`;
-    return result[0] || null;
+    return result[0] ? new Game(result[0]) : null;
   }
   
   static async findOne(options = {}) {
@@ -13,7 +19,6 @@ class Game {
       const conditions = Object.entries(options.where)
         .map(([key, value]) => {
           if (typeof value === 'object' && value[Object.keys(value)[0]]) {
-            // Handle Sequelize operators like { [Op.gte]: date }
             const op = Object.keys(value)[0];
             const val = value[op];
             if (op === 'gte') return `"${key}" >= '${val}'`;
@@ -36,14 +41,13 @@ class Game {
     
     query += ' LIMIT 1';
     const result = await sql.unsafe(query);
-    return result[0] || null;
+    return result[0] ? new Game(result[0]) : null;
   }
   
   static async findAll(options = {}) {
     let query = 'SELECT * FROM games';
     
     if (options.include) {
-      // Handle includes for joins
       query = `
         SELECT g.*, u.username, u."firstName", u."lastName"
         FROM games g
@@ -55,7 +59,6 @@ class Game {
       const conditions = Object.entries(options.where)
         .map(([key, value]) => {
           if (typeof value === 'object' && value[Object.keys(value)[0]]) {
-            // Handle Sequelize operators like { [Op.gte]: date }
             const op = Object.keys(value)[0];
             const val = value[op];
             if (op === 'gte') return `g."${key}" >= '${val}'`;
@@ -80,7 +83,8 @@ class Game {
       query += ` LIMIT ${options.limit}`;
     }
     
-    return await sql.unsafe(query);
+    const results = await sql.unsafe(query);
+    return results.map(row => new Game(row));
   }
   
   static async create(data) {
@@ -94,7 +98,7 @@ class Game {
       `;
       
       console.log('Game created successfully:', result[0]);
-      return result[0];
+      return new Game(result[0]);
     } catch (error) {
       console.error('Error creating game:', error);
       throw error;
