@@ -16,30 +16,43 @@ module.exports = router
 
 router.post('/login', async (req, res, next) => {
   try {
-    res.send({ token: await User.authenticate(req.body)}); 
+    console.log('Login attempt for user:', req.body.username);
+    const token = await User.authenticate(req.body);
+    console.log('Login successful, sending token');
+    res.send({ token }); 
   } catch (err) {
-    next(err)
+    console.error('Login error:', err);
+    next(err);
   }
 })
 
 router.post('/signup', async (req, res, next) => {
   try {
+    console.log('Signup attempt:', req.body);
     const { username, password, firstName, lastName, countryOfOrigin } = req.body
     
     // Validate required fields
     if (!username || !password || !firstName || !lastName || !countryOfOrigin) {
+      console.log('Validation failed: missing required fields');
       return res.status(400).send('All fields are required: username, password, firstName, lastName, countryOfOrigin')
     }
     
+    console.log('Creating user...');
     const user = await User.create({
       username,
       password,
       firstName,
       lastName,
       countryOfOrigin
-    })
-    res.send({token: await user.generateToken()})
+    });
+    console.log('User created successfully:', user.id);
+    
+    console.log('Generating token...');
+    const token = await user.generateToken();
+    console.log('Token generated, sending response');
+    res.send({token});
   } catch (err) {
+    console.error('Signup error:', err);
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists')
     } else if (err.name === 'SequelizeValidationError') {
@@ -52,8 +65,12 @@ router.post('/signup', async (req, res, next) => {
 
 router.get('/me', async (req, res, next) => {
   try {
-    res.send(await User.findByToken(req.headers.authorization))
+    console.log('Me request with token:', req.headers.authorization);
+    const user = await User.findByToken(req.headers.authorization);
+    console.log('User found:', user.id);
+    res.send(user);
   } catch (ex) {
-    next(ex)
+    console.error('Me error:', ex);
+    next(ex);
   }
 })

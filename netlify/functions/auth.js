@@ -1,8 +1,24 @@
 const serverless = require('serverless-http');
 const express = require('express');
 
-// Initialize serverless database and models
-require('../../server/db/serverless-index');
+console.log('=== AUTH FUNCTION STARTING ===');
+
+try {
+  // Initialize serverless database and models
+  require('../../server/db/serverless-index');
+  console.log('Serverless database initialized successfully');
+} catch (error) {
+  console.error('Failed to initialize serverless database:', error);
+  throw error;
+}
+
+try {
+  const authRouter = require('../../server/auth');
+  console.log('Auth router loaded successfully');
+} catch (error) {
+  console.error('Failed to load auth router:', error);
+  throw error;
+}
 
 const authRouter = require('../../server/auth');
 
@@ -29,13 +45,20 @@ app.use((req, res, next) => {
 // Auth routes
 app.use('/', authRouter);
 
+// 404 handler
+app.use((req, res) => {
+  console.log('404 - Route not found:', req.method, req.path);
+  res.status(404).json({ error: 'Route not found', path: req.path, method: req.method });
+});
+
 // Error handling
 app.use((err, req, res, next) => {
-  console.error(err);
+  console.error('Error in auth function:', err);
   res.status(err.status || 500).json({ 
     message: err.message || 'Internal server error',
-    error: process.env.NODE_ENV === 'development' ? err : {}
+    error: process.env.NODE_ENV === 'development' ? err.stack : {}
   });
 });
 
+console.log('Auth function setup complete');
 module.exports.handler = serverless(app);

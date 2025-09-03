@@ -47,10 +47,29 @@ class User {
   }
   
   static async create(data) {
-    const fields = Object.keys(data).join(', ');
-    const values = Object.values(data).map(v => `'${v}'`).join(', ');
-    const result = await sql.unsafe(`INSERT INTO users (${fields}) VALUES (${values}) RETURNING *`);
-    return result[0];
+    try {
+      console.log('Creating user with data:', data);
+      
+      // Hash the password
+      const hashedPassword = await bcrypt.hash(data.password, 5);
+      console.log('Password hashed');
+      
+      const fields = Object.keys(data).filter(key => key !== 'password').join(', ') + ', password';
+      const values = Object.values(data)
+        .filter((_, index) => Object.keys(data)[index] !== 'password')
+        .map(v => `'${v}'`)
+        .join(', ') + `, '${hashedPassword}'`;
+      
+      const query = `INSERT INTO users (${fields}) VALUES (${values}) RETURNING *`;
+      console.log('Executing query:', query);
+      
+      const result = await sql.unsafe(query);
+      console.log('User created successfully:', result[0]);
+      return result[0];
+    } catch (error) {
+      console.error('Error creating user:', error);
+      throw error;
+    }
   }
   
   static async count(options = {}) {
