@@ -13,10 +13,10 @@ class Game {
           lastName: data.lastName
         };
         
-        // Remove the flattened user properties
-        delete this.username;
-        delete this.firstName; 
-        delete this.lastName;
+        // Keep original properties for backwards compatibility
+        // delete this.username;
+        // delete this.firstName; 
+        // delete this.lastName;
       }
     }
   }

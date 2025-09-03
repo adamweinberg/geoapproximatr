@@ -11,9 +11,19 @@ import { resetLocation } from "../store/location";
 const Game = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { guess } = useSelector((state) => state);
+  const { guess, game } = useSelector((state) => state);
 
   const [activeStep, setActiveStep] = useState(1);
+
+  // Reset game state when starting a new game (component mounts at step 1)
+  useEffect(() => {
+    if (activeStep === 1 && (game.scores.length > 0 || game.distances.length > 0 || game.rounds.length > 0)) {
+      console.log('Cleaning up previous game state');
+      dispatch(resetGame());
+      dispatch(resetGuess());
+      dispatch(resetLocation());
+    }
+  }, []); // Empty dependency array means this runs once when component mounts
 
   // Add beforeunload protection during active game
   useEffect(() => {

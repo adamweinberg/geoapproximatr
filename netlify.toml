@@ -5,6 +5,8 @@
 
 [build.environment]
   NODE_VERSION = "20.18.1"
+  NETLIFY_USE_ESBUILD = "true"
+  DISABLE_ESLINT_PLUGIN = "true"
 
 # Redirect all /api and /auth requests to Netlify Functions
 [[redirects]]
