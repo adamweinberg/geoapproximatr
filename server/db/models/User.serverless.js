@@ -48,8 +48,8 @@ class User {
       query += ` LIMIT ${options.limit}`;
     }
     
-    const results = (await sql.unsafe(query)) || [];
-    return results.map(row => new User(row));
+    const results = await sql.unsafe(query);
+    return (results.length > 0 ? results : []).map(row => new User(row));
   }
   
   static async create(data) {

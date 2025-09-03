@@ -83,8 +83,8 @@ class Game {
       query += ` LIMIT ${options.limit}`;
     }
     
-    const results = (await sql.unsafe(query)) || [];
-    return results.map(row => new Game(row));
+    const results = await sql.unsafe(query);
+    return (results.length > 0 ? results : []).map(row => new Game(row));
   }
   
   static async create(data) {
