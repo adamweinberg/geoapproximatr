@@ -19,6 +19,7 @@ module.exports = router
 // Global high scores - no authentication required
 router.get('/global/all-time', async (req, res, next) => {
   try {
+    console.log('=== /games/global/all-time endpoint called ===');
     const games = await Game.findAll({
       include: [{
         model: User,
@@ -27,8 +28,10 @@ router.get('/global/all-time', async (req, res, next) => {
       order: [['totalScore', 'DESC']],
       limit: 20
     })
+    console.log('Games retrieved:', games.length);
     res.json(games)
   } catch (err) {
+    console.error('Error in /games/global/all-time:', err);
     next(err)
   }
 })

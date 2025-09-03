@@ -45,6 +45,8 @@ class Game {
   }
   
   static async findAll(options = {}) {
+    console.log('Game.findAll called with options:', JSON.stringify(options, null, 2));
+    
     let query = 'SELECT * FROM games';
     
     if (options.include) {
@@ -83,8 +85,20 @@ class Game {
       query += ` LIMIT ${options.limit}`;
     }
     
-    const results = await sql.unsafe(query);
-    return (results.length > 0 ? results : []).map(row => new Game(row));
+    console.log('Generated SQL query:', query);
+    
+    try {
+      const results = await sql.unsafe(query);
+      console.log('Query results count:', results.length);
+      console.log('First result sample:', results[0]);
+      
+      const gameObjects = (results.length > 0 ? results : []).map(row => new Game(row));
+      console.log('Returning games count:', gameObjects.length);
+      return gameObjects;
+    } catch (error) {
+      console.error('Error in Game.findAll:', error);
+      throw error;
+    }
   }
   
   static async create(data) {
