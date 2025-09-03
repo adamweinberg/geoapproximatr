@@ -4,6 +4,20 @@ class Game {
   constructor(data) {
     if (data) {
       Object.assign(this, data);
+      
+      // If we have user fields from JOIN, restructure them into a user object
+      if (data.username || data.firstName || data.lastName) {
+        this.user = {
+          username: data.username,
+          firstName: data.firstName,
+          lastName: data.lastName
+        };
+        
+        // Remove the flattened user properties
+        delete this.username;
+        delete this.firstName; 
+        delete this.lastName;
+      }
     }
   }
 
