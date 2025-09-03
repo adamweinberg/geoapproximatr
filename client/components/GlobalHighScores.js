@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Trophy, Calendar, Zap, Globe, Target } from 'lucide-react';
 import axios from 'axios';
 
 const GlobalHighScores = () => {
@@ -8,9 +9,9 @@ const GlobalHighScores = () => {
   const [error, setError] = useState(null);
 
   const tabs = [
-    { id: 'all-time', label: 'All Time', icon: '🏆' },
-    { id: '30-days', label: 'Past 30 Days', icon: '📅' },
-    { id: '24-hours', label: 'Past 24 Hours', icon: '⚡' }
+    { id: 'all-time', label: 'All Time', icon: Trophy },
+    { id: '30-days', label: 'Past 30 Days', icon: Calendar },
+    { id: '24-hours', label: 'Past 24 Hours', icon: Zap }
   ];
 
   useEffect(() => {
@@ -77,7 +78,7 @@ const GlobalHighScores = () => {
   return (
     <div className="leaderboard-container">
       <div className="leaderboard-header">
-        <h1>🌎 Global Leaderboard</h1>
+        <h1><Globe size={28} className="inline-icon" /> Global Leaderboard</h1>
         <p>See how you stack up against players worldwide</p>
       </div>
 
@@ -88,7 +89,7 @@ const GlobalHighScores = () => {
             className={`tab-button ${activeTab === tab.id ? 'active' : ''}`}
             onClick={() => setActiveTab(tab.id)}
           >
-            <span className="tab-icon">{tab.icon}</span>
+            <span className="tab-icon"><tab.icon size={18} /></span>
             <span className="tab-label">{tab.label}</span>
           </button>
         ))}
@@ -126,7 +127,7 @@ const GlobalHighScores = () => {
           </div>
         ) : (
           <div className="no-scores">
-            <div className="no-scores-icon">🎯</div>
+            <div className="no-scores-icon"><Target size={48} /></div>
             <h3>No scores yet!</h3>
             <p>Be the first to set a high score in this time period.</p>
           </div>

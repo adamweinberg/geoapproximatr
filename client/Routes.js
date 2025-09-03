@@ -7,6 +7,7 @@ import {me} from './store'
 import Game from './components/Game'
 import UserDashboard from './components/UserDashboard'
 import GlobalHighScores from './components/GlobalHighScores'
+import Account from './components/Account'
 import Navbar from './components/Navbar'
 
 /**
@@ -42,6 +43,9 @@ const Routes = () => {
         </Route>
         <Route path="/dashboard">
           {isLoggedIn ? <UserDashboard /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/account">
+          {isLoggedIn ? <Account /> : <Redirect to="/login" />}
         </Route>
         <Route path="/leaderboard">
           <GlobalHighScores />

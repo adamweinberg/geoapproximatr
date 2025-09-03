@@ -24,7 +24,10 @@ const Map = (props) => {
   };
 
   const placeMarker = (event) => {
-    setGuess({ latitude: event.lat, longitude: event.lng });
+    const newGuess = { latitude: event.lat, longitude: event.lng };
+    setGuess(newGuess);
+    // Also immediately update the global state so other components can see it
+    dispatch(submitGuess(newGuess));
   };
 
   useEffect(() => {

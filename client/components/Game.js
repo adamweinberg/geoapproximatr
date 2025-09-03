@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import Approximatr from "./Approximatr";
 import RoundResult from "./RoundResult";
 import GameSummary from "./GameSummary";
@@ -9,11 +10,52 @@ import { resetLocation } from "../store/location";
 
 const Game = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { guess } = useSelector((state) => state);
 
   const [activeStep, setActiveStep] = useState(1);
 
+  // Add beforeunload protection during active game
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      // Only show warning if game is in progress (not on final summary)
+      if (activeStep <= 10) {
+        event.preventDefault();
+        event.returnValue = ''; // Chrome requires returnValue to be set
+        return ''; // Some browsers require a return value
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [activeStep]);
+
+  // Block in-app navigation during active game
+  useEffect(() => {
+    const unblock = history.block((location, action) => {
+      // Only block if game is in progress (not on final summary)
+      if (activeStep <= 10) {
+        return 'Are you sure you want to leave the game? Your progress will be lost.';
+      }
+    });
+
+    return unblock;
+  }, [history, activeStep]);
+
+  // Check if user has made a valid guess
+  const hasValidGuess = () => {
+    return guess.latitude !== null && guess.longitude !== null &&
+           typeof guess.latitude === 'number' && typeof guess.longitude === 'number' &&
+           !isNaN(guess.latitude) && !isNaN(guess.longitude);
+  };
+
   const handleSubmit = () => {
-    setActiveStep(activeStep + 1);
+    if (hasValidGuess()) {
+      setActiveStep(activeStep + 1);
+    }
   };
 
   const handleNewGame = () => {
@@ -51,13 +93,15 @@ const Game = () => {
         </React.Fragment>
       );
     } else if (step % 2 === 1) {
+      const isValidGuess = hasValidGuess();
       return (
         <React.Fragment>
           <Approximatr activeStep={activeStep} />
           <button 
             id="submit-guess-button" 
-            className="action-button btn btn-accent"
+            className={`action-button btn ${isValidGuess ? 'btn-accent' : 'btn-disabled'}`}
             onClick={handleSubmit}
+            disabled={!isValidGuess}
           >
             Submit Guess
           </button>
