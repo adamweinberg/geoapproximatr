@@ -3,17 +3,10 @@ import { Star, Trophy, PartyPopper, Sparkles, Rocket, X } from 'lucide-react';
 import BarGraph from './BarGraph';
 import GameTable from './GameTable';
 import RoundSlideshow from './RoundSlideshow';
+import getPerformanceMessage from "../script/get-performance-message";
 
 const GameSummaryModal = ({ game, onClose }) => {
   if (!game) return null;
-
-  const getPerformanceMessage = (score) => {
-    if (score >= 20000) return { message: "Outstanding! Geographic genius!", icon: Sparkles };
-    if (score >= 15000) return { message: "Excellent! You know your world!", icon: Star };
-    if (score >= 10000) return { message: "Great job! Keep exploring!", icon: PartyPopper };
-    if (score >= 5000) return { message: "Good effort! Practice makes perfect!", icon: Trophy };
-    return { message: "Keep adventuring! Every journey teaches us!", icon: Rocket };
-  };
 
   const performance = getPerformanceMessage(game.totalScore);
 

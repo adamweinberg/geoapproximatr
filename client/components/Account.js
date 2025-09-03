@@ -279,9 +279,10 @@ const Account = () => {
           </div>
           
           <div className="security-actions">
-            <Link to="/change-password" className="btn btn-secondary security-btn">
+            {/* TODO: Add change password functionality */}
+            {/* <Link to="/change-password" className="btn btn-secondary security-btn">
               <Key size={16} /> Change Password
-            </Link>
+            </Link> */}
             
             {!showDeleteConfirm ? (
               <button 

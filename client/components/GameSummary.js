@@ -5,6 +5,7 @@ import axios from "axios";
 import BarGraph from "./BarGraph";
 import GameTable from "./GameTable";
 import RoundSlideshow from "./RoundSlideshow";
+import getPerformanceMessage from "../script/get-performance-message";
 
 const GameSummary = () => {
   const { game, auth } = useSelector((state) => state);
@@ -58,14 +59,6 @@ const GameSummary = () => {
     const timeoutId = setTimeout(saveGame, 100);
     return () => clearTimeout(timeoutId);
   }, [auth.id, gameSaved, game.scores.length, game.distances.length, totalScore]);
-
-  const getPerformanceMessage = (score) => {
-    if (score >= 20000) return { message: "Outstanding! Geographic genius!", icon: Sparkles };
-    if (score >= 15000) return { message: "Excellent! You know your world!", icon: Star };
-    if (score >= 10000) return { message: "Great job! Keep exploring!", icon: PartyPopper };
-    if (score >= 5000) return { message: "Good effort! Practice makes perfect!", icon: Trophy };
-    return { message: "Keep adventuring! Every journey teaches us!", icon: Rocket };
-  };
 
   const performance = getPerformanceMessage(totalScore);
 

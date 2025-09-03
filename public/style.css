@@ -56,6 +56,9 @@
   --transition-fast: 0.15s ease-out;
   --transition-normal: 0.3s ease-out;
   --transition-slow: 0.5s ease-out;
+  
+  /* Layout */
+  --navbar-height: 80px;
 }
 
 /* Reset and Base Styles */
@@ -215,14 +218,14 @@ input:focus, textarea:focus, select:focus {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: var(--space-16) var(--space-8);
+  padding: calc(var(--navbar-height) + var(--space-8)) var(--space-8) var(--space-16);
   gap: var(--space-8);
 }
 
 /* Tablet spacing adjustments */
 @media (max-width: 768px) {
   #home-container {
-    padding: var(--space-12) var(--space-6);
+    padding: calc(var(--navbar-height) + var(--space-6)) var(--space-6) var(--space-12);
     gap: var(--space-6);
   }
   
@@ -244,7 +247,7 @@ input:focus, textarea:focus, select:focus {
 /* Mobile spacing adjustments */
 @media (max-width: 480px) {
   #home-container {
-    padding: var(--space-8) var(--space-4);
+    padding: calc(var(--navbar-height) + var(--space-4)) var(--space-4) var(--space-8);
     gap: var(--space-4);
   }
   
@@ -352,8 +355,8 @@ input:focus, textarea:focus, select:focus {
 
 /* Game container with navbar present */
 .with-navbar #approximatr-container {
-  height: calc(100vh - 60px); /* Subtract navbar height */
-  margin-top: 60px; /* Push down by navbar height */
+  height: calc(100vh - var(--navbar-height)); /* Subtract navbar height */
+  margin-top: var(--navbar-height); /* Push down by navbar height */
 }
 
 #game-header {
@@ -499,10 +502,10 @@ input:focus, textarea:focus, select:focus {
 /* Results Styles */
 #round-results {
   position: fixed;
-  top: var(--space-6);
+  top: calc(var(--navbar-height) + var(--space-4));
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
+  z-index: 999; /* Just below navbar */
   padding: var(--space-4);
   border-radius: var(--radius-xl);
   text-align: center;
@@ -605,9 +608,9 @@ input:focus, textarea:focus, select:focus {
 
 .show-results-btn {
   position: fixed;
-  top: var(--space-6);
+  top: calc(var(--navbar-height) + var(--space-4));
   right: var(--space-6);
-  z-index: 1000;
+  z-index: 999; /* Just below navbar */
   background: var(--primary-gradient);
   border: none;
   border-radius: var(--radius-lg);
@@ -654,7 +657,7 @@ input:focus, textarea:focus, select:focus {
 /* Game Summary */
 #game-summary {
   max-width: 800px;
-  margin: var(--space-8) auto;
+  margin: calc(var(--navbar-height) + var(--space-8)) auto var(--space-16);
   padding: var(--space-8);
   border-radius: var(--radius-2xl);
   text-align: center;
@@ -923,10 +926,13 @@ nav {
   top: 0;
   left: 0;
   right: 0;
+  height: var(--navbar-height);
   z-index: 1000;
-  padding: var(--space-4) var(--space-6);
+  padding: 0 var(--space-6);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
 }
 
 nav .nav-content {
@@ -985,12 +991,10 @@ nav a.active::after {
 nav.game-navbar {
   background: rgba(15, 15, 35, 0.8);
   backdrop-filter: blur(10px);
-  padding: var(--space-2) var(--space-4);
+  padding: 0 var(--space-4);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  z-index: 500; /* Lower z-index than regular navbar */
-  height: 60px; /* Fixed height for consistent layout */
-  display: flex;
-  align-items: center;
+  z-index: 1001; /* Higher z-index to stay above game elements */
+  height: var(--navbar-height);
 }
 
 nav.game-navbar .nav-content {
@@ -1154,7 +1158,7 @@ nav.game-navbar .new-game-btn {
 /* Account Page Styles */
 .account-container {
   min-height: 100vh;
-  padding: var(--space-16) var(--space-8);
+  padding: calc(var(--navbar-height) + var(--space-8)) var(--space-8) var(--space-8);
   background: var(--bg-primary);
 }
 
@@ -1449,7 +1453,7 @@ nav.game-navbar .new-game-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-8);
+  padding: calc(var(--navbar-height) + var(--space-8)) var(--space-8) var(--space-8);
 }
 
 .auth-form {
@@ -1696,7 +1700,7 @@ nav.game-navbar .new-game-btn {
   
   /* Compact results for mobile */
   #round-results {
-    top: var(--space-4);
+    top: calc(var(--navbar-height) + var(--space-2));
     max-width: calc(100% - 2 * var(--space-4));
     min-width: auto;
     padding: var(--space-3);
@@ -1766,7 +1770,7 @@ nav.game-navbar .new-game-btn {
 /* User Dashboard Styles */
 .dashboard-container {
   min-height: 100vh;
-  padding: calc(80px + var(--space-8)) var(--space-8) var(--space-8);
+  padding: calc(var(--navbar-height) + var(--space-8)) var(--space-8) var(--space-8);
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -2010,7 +2014,7 @@ nav.game-navbar .new-game-btn {
 /* Global Leaderboard Styles */
 .leaderboard-container {
   min-height: 100vh;
-  padding: calc(80px + var(--space-8)) var(--space-8) var(--space-8);
+  padding: calc(var(--navbar-height) + var(--space-8)) var(--space-8) var(--space-8);
   max-width: 1000px;
   margin: 0 auto;
 }
