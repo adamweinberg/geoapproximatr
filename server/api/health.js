@@ -1,5 +1,13 @@
 const router = require('express').Router()
-const { db } = require('../db')
+// Use serverless db if available, fallback to regular db
+let db;
+try {
+  db = require('../db/serverless-index').db;
+  console.log('Health check using serverless db');
+} catch {
+  db = require('../db').db;
+  console.log('Health check using regular db');
+}
 module.exports = router
 
 // Health check endpoint to debug database connection

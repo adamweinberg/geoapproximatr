@@ -1,5 +1,18 @@
 const router = require('express').Router()
-const { models: { Game, User }} = require('../db')
+// Use serverless models if available, fallback to regular models
+let Game, User;
+try {
+  const serverlessModels = require('../db/serverless-index').models;
+  Game = serverlessModels.Game;
+  User = serverlessModels.User;
+  console.log('Games route using serverless models');
+} catch {
+  const regularModels = require('../db').models;
+  Game = regularModels.Game;
+  User = regularModels.User;
+  console.log('Games route using regular models');
+}
+
 const { Op } = require('sequelize')
 module.exports = router
 
