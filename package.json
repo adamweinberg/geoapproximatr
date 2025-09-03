@@ -42,7 +42,7 @@
     "load-google-maps-api": "^2.0.2",
     "lucide-react": "^0.542.0",
     "morgan": "^1.9.1",
-    "pg": "^8.5.1",
+    "pg": "^8.16.3",
     "react-google-maps": "^9.4.5",
     "react-google-streetview": "0.0.9",
     "react-loader-spinner": "^4.0.0",
