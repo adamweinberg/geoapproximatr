@@ -60,18 +60,29 @@ class Game {
     if (options.where) {
       const conditions = Object.entries(options.where)
         .map(([key, value]) => {
-          if (typeof value === 'object' && value[Object.keys(value)[0]]) {
-            const op = Object.keys(value)[0];
-            const val = value[op];
-            if (op === 'gte') return `g."${key}" >= '${val}'`;
-            if (op === 'lte') return `g."${key}" <= '${val}'`;
-            if (op === 'gt') return `g."${key}" > '${val}'`;
-            if (op === 'lt') return `g."${key}" < '${val}'`;
+          if (typeof value === 'object' && value !== null) {
+            // Handle Sequelize operators
+            const operators = Object.keys(value);
+            if (operators.length > 0) {
+              const op = operators[0];
+              const val = value[op];
+              console.log(`Processing operator: ${op} with value:`, val);
+              if (op === 'gte') return `g."${key}" >= '${val}'`;
+              if (op === 'lte') return `g."${key}" <= '${val}'`;
+              if (op === 'gt') return `g."${key}" > '${val}'`;
+              if (op === 'lt') return `g."${key}" < '${val}'`;
+            }
+            console.log(`Unhandled object value for ${key}:`, value);
+            return null; // Skip this condition
           }
           return `g."${key}" = '${value}'`;
         })
+        .filter(condition => condition !== null) // Remove null conditions
         .join(' AND ');
-      query += ` WHERE ${conditions}`;
+      
+      if (conditions) {
+        query += ` WHERE ${conditions}`;
+      }
     }
     
     if (options.order) {
@@ -88,15 +99,32 @@ class Game {
     console.log('Generated SQL query:', query);
     
     try {
+      console.log('About to execute query...');
       const results = await sql.unsafe(query);
+      console.log('Raw SQL results:', results);
+      console.log('Results type:', typeof results);
+      console.log('Results is array:', Array.isArray(results));
+      
+      // Handle case where results might be undefined or not an array
+      if (!results) {
+        console.log('Results is undefined or null');
+        return [];
+      }
+      
+      if (!Array.isArray(results)) {
+        console.log('Results is not an array, converting...');
+        return [];
+      }
+      
       console.log('Query results count:', results.length);
       console.log('First result sample:', results[0]);
       
-      const gameObjects = (results.length > 0 ? results : []).map(row => new Game(row));
+      const gameObjects = results.map(row => new Game(row));
       console.log('Returning games count:', gameObjects.length);
       return gameObjects;
     } catch (error) {
       console.error('Error in Game.findAll:', error);
+      console.error('Error details:', error.message, error.stack);
       throw error;
     }
   }

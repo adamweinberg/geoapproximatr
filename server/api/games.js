@@ -20,6 +20,17 @@ module.exports = router
 router.get('/global/all-time', async (req, res, next) => {
   try {
     console.log('=== /games/global/all-time endpoint called ===');
+    
+    // First, let's test a simple query without joins
+    console.log('Testing simple games query...');
+    const simpleGames = await Game.findAll({
+      order: [['totalScore', 'DESC']],
+      limit: 5
+    });
+    console.log('Simple games query result:', simpleGames.length);
+    
+    // Now try the full query
+    console.log('Trying full query with joins...');
     const games = await Game.findAll({
       include: [{
         model: User,
