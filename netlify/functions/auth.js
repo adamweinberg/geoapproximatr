@@ -33,11 +33,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// Strip /api prefix from the path since Netlify redirects include it
+// Strip /auth prefix from the path since Netlify redirects include it
 app.use((req, res, next) => {
-  if (req.path.startsWith('/api')) {
-    req.url = req.url.replace('/api', '') || '/';
-    console.log('Stripped /api prefix, new path:', req.path);
+  if (req.path.startsWith('/auth')) {
+    req.url = req.url.replace('/auth', '') || '/';
+    console.log('Stripped /auth prefix, new path:', req.path);
   }
   next();
 });
