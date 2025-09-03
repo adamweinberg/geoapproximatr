@@ -1,8 +1,8 @@
 const { neon } = require('@neondatabase/serverless');
 const { Sequelize } = require('sequelize');
 
-// Use Neon serverless driver for Netlify Functions
-const databaseUrl = process.env.DATABASE_URL || process.env.NETLIFY_DATABASE_URL;
+// Use Neon serverless driver for Netlify Functions - prioritize NETLIFY_DATABASE_URL
+const databaseUrl = process.env.NETLIFY_DATABASE_URL || process.env.DATABASE_URL;
 
 console.log('Serverless DB - DATABASE_URL available:', !!process.env.DATABASE_URL);
 console.log('Serverless DB - NETLIFY_DATABASE_URL available:', !!process.env.NETLIFY_DATABASE_URL);
