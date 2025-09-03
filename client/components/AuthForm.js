@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {authenticate} from '../store'
 import {Link} from 'react-router-dom'
+import { getData } from 'country-list'
 
 /**
  * COMPONENT
@@ -22,6 +23,29 @@ const AuthForm = props => {
             <label htmlFor="password">Password</label>
             <input name="password" type="password" placeholder="Enter your password" required />
           </div>
+          
+          {name === 'signup' && (
+            <>
+              <div className="form-group">
+                <label htmlFor="firstName">First Name</label>
+                <input name="firstName" type="text" placeholder="Enter your first name" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="lastName">Last Name</label>
+                <input name="lastName" type="text" placeholder="Enter your last name" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="countryOfOrigin">Country of Origin</label>
+                <select name="countryOfOrigin" className="form-input" required>
+                  <option value="">Select your country</option>
+                  {getData().map(country => (
+                    <option key={country.code} value={country.name}>{country.name}</option>
+                  ))}
+                </select>
+              </div>
+            </>
+          )}
+          
           <div className="form-group">
             <button type="submit" className="btn btn-primary" style={{width: '100%'}}>
               {displayName}
@@ -98,7 +122,22 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const username = evt.target.username.value
       const password = evt.target.password.value
-      dispatch(authenticate(username, password, formName))
+      
+      if (formName === 'signup') {
+        const firstName = evt.target.firstName.value
+        const lastName = evt.target.lastName.value
+        const countryOfOrigin = evt.target.countryOfOrigin.value
+        
+        dispatch(authenticate({ 
+          username, 
+          password, 
+          firstName, 
+          lastName, 
+          countryOfOrigin 
+        }, formName))
+      } else {
+        dispatch(authenticate({ username, password }, formName))
+      }
     }
   }
 }

@@ -6,7 +6,7 @@ import axios from 'axios';
 import GameSummaryModal from './GameSummaryModal';
 
 const UserDashboard = () => {
-  const { username, id } = useSelector(state => state.auth);
+  const { firstName, lastName, id } = useSelector(state => state.auth);
   const [highScores, setHighScores] = useState([]);
   const [recentGames, setRecentGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState(null);
@@ -75,7 +75,7 @@ const UserDashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
-        <h1>Welcome back, {username}!</h1>
+        <h1>Welcome back, {firstName} {lastName}!</h1>
         <p>Track your progress and review your best games</p>
         <Link to="/game" className="btn btn-accent">
           Start New Game

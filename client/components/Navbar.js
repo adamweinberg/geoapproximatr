@@ -8,9 +8,12 @@ const Navbar = ({handleClick, isLoggedIn, isGamePage, user}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef(null)
   
-  const getUserInitials = (username) => {
-    if (!username) return 'U'
-    return username.charAt(0).toUpperCase()
+  const getUserInitials = (user) => {
+    if (!user.username) return 'U'
+    if (user.firstName && user.lastName) {
+      return `${user.firstName.charAt(0).toUpperCase()}${user.lastName.charAt(0).toUpperCase()}`
+    }
+    return user.username.charAt(0).toUpperCase()
   }
 
   useEffect(() => {
@@ -42,7 +45,7 @@ const Navbar = ({handleClick, isLoggedIn, isGamePage, user}) => {
                 className="user-avatar-btn"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
-                {getUserInitials(user.username)}
+                {getUserInitials(user)}
               </button>
               {dropdownOpen && (
                 <div className="dropdown-menu">

@@ -14,6 +14,45 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
+  },
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        msg: 'First name is required and cannot be empty'
+      },
+      len: {
+        args: [1, 255],
+        msg: 'First name must be between 1 and 255 characters'
+      }
+    }
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        msg: 'Last name is required and cannot be empty'
+      },
+      len: {
+        args: [1, 255],
+        msg: 'Last name must be between 1 and 255 characters'
+      }
+    }
+  },
+  countryOfOrigin: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        msg: 'Country of origin is required and cannot be empty'
+      },
+      len: {
+        args: [1, 255],
+        msg: 'Country of origin must be between 1 and 255 characters'
+      }
+    }
   }
 })
 
@@ -47,7 +86,9 @@ User.authenticate = async function({ username, password }){
 User.findByToken = async function(token) {
   try {
     const {id} = await jwt.verify(token, process.env.JWT)
-    const user = User.findByPk(id)
+    const user = User.findByPk(id, {
+      attributes: ['id', 'username', 'firstName', 'lastName', 'countryOfOrigin']
+    })
     if (!user) {
       throw 'nooo'
     }
