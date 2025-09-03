@@ -9,11 +9,6 @@
   node_bundler = "esbuild"
   external_node_modules = ["pg-native"]
 
-[[plugins]]
-  package = "@netlify/plugin-functions"
-  [plugins.inputs]
-    externalNodeModules = ["pg-native"]
-
 # Redirect all /api and /auth requests to Netlify Functions
 [[redirects]]
   from = "/api/*"
